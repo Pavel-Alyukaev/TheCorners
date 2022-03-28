@@ -1,29 +1,14 @@
 ﻿#include "stdafx.h"
 #include "Player.h"
-
 #include "Figure.h"
 
-Player::Player(): m_isActive(false), m_scale(1.0f)
+Player::Player(): m_scale(1.0f), m_isActive(false)
 {
 	m_figures.reserve(9);
 }
 
 void Player::Init()
 {
-	m_figures.clear();
-	for (int i = 1; i < 4; ++i)
-	{
-		for (int r = 8; r >= 6; --r)
-		{
-			m_figures.emplace_back(std::make_shared<Figure>());
-			m_figures.back()->SetScale(m_scale);
-			m_figures.back()->Init();
-			m_figures.back()->SetCurrentCell({ r,i });
-			
-		}
-	}
-	m_figures.front()->Select();
-
 }
 
 void Player::SetActive()
@@ -36,6 +21,11 @@ void Player::SetPassive()
 	m_isActive = false;
 }
 
+bool Player::IsActive() const
+{
+	return m_isActive;
+}
+
 void Player::UnselectAllFigure()
 {
 	for (auto&& item : m_figures)
@@ -44,7 +34,7 @@ void Player::UnselectAllFigure()
 	}
 }
 
-std::vector<std::shared_ptr<Figure>> Player::GetFigure()
+std::vector<std::shared_ptr<Figure>> Player::GetFigures()
 {
 	return m_figures;
 }
@@ -62,15 +52,16 @@ void Player::SetScale(float scale)
 	m_scale = scale;
 }
 
-int Player::GetindexSelectedFigure()
+int Player::GetIndexSelectedFigure()
 {
-	int result = -1;
+	int result = 0;
 
-	const auto iterator = std::find_if(m_figures.begin(), m_figures.end(), [](const auto& item) {return item->IsSelected(); });
+	const auto iterator = std::find_if(m_figures.begin(), m_figures.end(),
+	                                   [](const auto& item) { return item->IsSelected(); });
 
-	if(iterator != m_figures.end())
+	if (iterator != m_figures.end())
 	{
-		result = iterator - m_figures.begin();
+		result = std::distance(m_figures.begin(), iterator);
 	}
 
 	return result;

@@ -148,24 +148,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BlackFigure.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBlack.cpp" />
+    <ClCompile Include="PlayerWite.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="WhiteFigure.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BlackFigure.h" />
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="IMoveFigure.h" />
     <ClInclude Include="IGameEntity.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBlack.h" />
+    <ClInclude Include="PlayerWite.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="WhiteFigure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,10 +1,11 @@
 ﻿#include "stdafx.h"
 #include "ChessBoard.h"
 
+//TODO убрать в конфиг cellSize
 ChessBoard::ChessBoard(): m_scale(1.0f), m_cellSize(63)
 {
 	m_globalPossition = sf::Vector2f(0.f, 0.f);
-
+	//TODO убрать в конфиг
 	m_firstCellLocalPossition.x = 127;
 	m_firstCellLocalPossition.y = 627;
 
@@ -15,46 +16,47 @@ ChessBoard::ChessBoard(): m_scale(1.0f), m_cellSize(63)
 
 void ChessBoard::Init()
 {
+	
 	// Связываем текстуру и спрайт
+	//TODO убрать в конфиг название текстуры
 	m_Texture.loadFromFile("board.jpg");
 	m_Sprite.setTexture(m_Texture);
 
 	UpdateScale();
-
 }
 
-sf::Vector2f ChessBoard::ConvertCageNumberToGlobalCoordinate(BoardCell currCell) const
+sf::Vector2f ChessBoard::ConvertCageNumberToGlobalCoordinate(BoardCell currentCell) const
 {
 	sf::Vector2f result = m_globalPossition;
 
-	result.x += (m_firstCellLocalPossition.x + (currCell.Col - 1) * m_cellSize) * m_scale;
-	result.y += (m_firstCellLocalPossition.y - currCell.Row * m_cellSize) * m_scale;
+	result.x += (m_firstCellLocalPossition.x + (currentCell.Col - 1) * m_cellSize) * m_scale;
+	result.y += (m_firstCellLocalPossition.y - currentCell.Row * m_cellSize) * m_scale;
 
 	return result;
 }
 
-BoardCell ChessBoard::GetCellOnTheRight(BoardCell currCell) const
+BoardCell ChessBoard::GetCellOnTheRight(BoardCell currentCell) const
 {
-	currCell.Col += 1;
-	return currCell;
+	currentCell.Col += 1;
+	return currentCell;
 }
 
-BoardCell ChessBoard::GetCellFromTheTop(BoardCell currCell)  const
+BoardCell ChessBoard::GetCellFromTheTop(BoardCell currentCell) const
 {
-	currCell.Row += 1;
-	return currCell;
+	currentCell.Row += 1;
+	return currentCell;
 }
 
-BoardCell ChessBoard::GetCellOnTheLeft(BoardCell currCell) const
+BoardCell ChessBoard::GetCellOnTheLeft(BoardCell currentCell) const
 {
-	currCell.Col -= 1;
-	return currCell;
+	currentCell.Col -= 1;
+	return currentCell;
 }
 
-BoardCell ChessBoard::GetCellFromTheBottom(BoardCell currCell) const
+BoardCell ChessBoard::GetCellFromTheBottom(BoardCell currentCell) const
 {
-	currCell.Row -= 1;
-	return currCell;
+	currentCell.Row -= 1;
+	return currentCell;
 }
 
 void ChessBoard::SetScale(float scale)
@@ -88,9 +90,9 @@ int ChessBoard::GetCellSize() const
 	return m_cellSize * m_scale;
 }
 
-bool ChessBoard::CheckBorder(BoardCell currCell) const
+bool ChessBoard::CheckBorder(BoardCell currentCell) const
 {
-	return currCell.Col > 0 && currCell.Col < 9 && currCell.Row>0 && currCell.Row < 9;
+	return currentCell.Col > 0 && currentCell.Col < 9 && currentCell.Row > 0 && currentCell.Row < 9;
 }
 
 bool ChessBoard::ThereAreMoves(BoardCell currCell) const
@@ -107,22 +109,21 @@ bool ChessBoard::ThereAreMoves(BoardCell currCell) const
 	return forward || backward || left || right;
 }
 
-void ChessBoard::ChangeOcupateCells(BoardCell currCell)
+void ChessBoard::ChangeOcupateCells(BoardCell currentCell)
 {
-	auto iter = std::find(m_occupiedCells.begin(), m_occupiedCells.end(), currCell);
+	auto iter = std::find(m_occupiedCells.begin(), m_occupiedCells.end(), currentCell);
 	if (iter == m_occupiedCells.end())
 	{
-		m_occupiedCells.emplace_back(currCell);
+		m_occupiedCells.emplace_back(currentCell);
 	}
 	else
 	{
-		*iter = GetCellFromTheTop(currCell);
+		*iter = GetCellFromTheTop(currentCell);
 	}
 }
 
-bool ChessBoard::CanMoveToCell(BoardCell currCell) const
+bool ChessBoard::CanMoveToCell(BoardCell currentCell) const
 {
-	return std::none_of(m_occupiedCells.begin(), m_occupiedCells.end(), [&currCell](const auto& item) {return item == currCell; }) && CheckBorder(currCell);
+	return std::none_of(m_occupiedCells.begin(), m_occupiedCells.end(),
+	                    [&currentCell](const auto& item) { return item == currentCell; }) && CheckBorder(currentCell);
 }
-
-

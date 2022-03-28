@@ -1,6 +1,6 @@
 ﻿// ****************************************************************************
 //  Figure.h
-//  TODO краткое описание класса
+//  Базовый класс фигур
 // ****************************************************************************
 
 #pragma once
@@ -11,15 +11,14 @@ class Figure : public IMoveFigure
 {
 public:
 	Figure();
-	~Figure() = default;
+	virtual ~Figure();
 
-	void Init();
+	virtual void Init();
 
-
-	BoardCell GetCurrentCell();
+	BoardCell GetCurrentCell() const;
 	void SetCurrentCell(BoardCell);
 
-	void SetCurrentPossition(sf::Vector2f);
+	void SetCurrentPosition(sf::Vector2f);
 
 	void MovingForward() override;
 	void MovingLeft() override;
@@ -36,20 +35,10 @@ public:
 
 	void Select();
 	void Unselect();
-	bool IsSelected();
+	bool IsSelected() const;
+	bool IsMoved() const;
 
-private:
-
-	BoardCell m_currentCell;
-
-	sf::Vector2f m_endPosition;
-	sf::Vector2i m_direction;
-
-	float m_Speed;
-	float m_localMovedPosition;
-
-	bool m_isMoved{};
-
+protected:
 	// Объявляем объект Sprite
 	sf::Sprite m_Sprite;
 
@@ -60,6 +49,17 @@ private:
 	float m_scale;
 
 	float m_step;
+
+private:
+	BoardCell m_currentCell;
+
+	sf::Vector2f m_endPosition;
+	sf::Vector2i m_direction;
+
+	float m_Speed;
+	float m_localMovedPosition;
+
+	bool m_isMoved{};
 
 	bool m_isSelected;
 };

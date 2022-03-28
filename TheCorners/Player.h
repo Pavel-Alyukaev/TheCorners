@@ -11,28 +11,29 @@ class Player
 public:
 	Player();
 
-	void Init();
+	virtual void Init();
 
 	void SetActive();
 	void SetPassive();
 
+	bool IsActive() const;
+
 	void UnselectAllFigure();
 
-	std::vector<std::shared_ptr<Figure>> GetFigure();
+	std::vector<std::shared_ptr<Figure>> GetFigures();
 	void Update(float dtAsSeconds);
 
 	void SetScale(float scale);
-	int GetindexSelectedFigure();
+	int GetIndexSelectedFigure();
 
+protected:
+	std::vector<std::shared_ptr<Figure>> m_figures;
+	float m_scale;
 
 private:
 	bool m_isActive;
 
-	std::vector<std::shared_ptr<Figure>> m_figures;
 
-
-
-	float m_scale;
 };
 
 
