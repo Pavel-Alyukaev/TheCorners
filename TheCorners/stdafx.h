@@ -12,8 +12,13 @@ struct BoardCell
 	int Col;
 	int Row;
 
-	BoardCell() :Col(1), Row(1) {}
-	BoardCell(int col, int row) :Col(col), Row(row) {}
+	BoardCell() : Col(1), Row(1)
+	{
+	}
+
+	BoardCell(int col, int row) : Col(col), Row(row)
+	{
+	}
 
 	bool operator ==(const BoardCell& right)
 	{
@@ -24,5 +29,4 @@ struct BoardCell
 	{
 		return Row == right.Row && Col == right.Col;
 	}
-
 };

@@ -58,10 +58,10 @@ private:
 
 	int m_cellSize;
 
-	sf::Vector2f m_firstCellLocalPossition;
+	sf::Vector2f m_firstCellLocalPosition;
 	sf::Vector2u m_resolution;
 
-	sf::Vector2f m_globalPossition;
+	sf::Vector2f m_globalPosition;
 
 	std::vector<BoardCell> m_occupiedCells;
 };

@@ -1,16 +1,15 @@
 ﻿// ****************************************************************************
-//  WhiteFigure.h
-//	Класс белых фигур
+//  FigureView2.h
+//  TODO краткое описание класса
 // ****************************************************************************
 
 #pragma once
-#include "Figure.h"
-
-class WhiteFigure final : public Figure
+#include "FigureViewBase.h"
+namespace View
+{
+class FigureView2 final : public FigureViewBase
 {
 public:
-	WhiteFigure();
-	~WhiteFigure() override;
-
 	void Init() override;
 };
+}

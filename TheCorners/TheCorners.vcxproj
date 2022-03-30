@@ -148,11 +148,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseView.cpp" />
     <ClCompile Include="BlackFigure.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
+    <ClCompile Include="ChessBoardView.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Figure.cpp" />
+    <ClCompile Include="FigureView1.cpp" />
+    <ClCompile Include="FigureView2.cpp" />
+    <ClCompile Include="FigureBase.cpp" />
+    <ClCompile Include="FiguresView.cpp" />
+    <ClCompile Include="FigureViewBase.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player1.cpp" />
+    <ClCompile Include="Player2.cpp" />
+    <ClCompile Include="PlayerBase.cpp" />
+    <ClCompile Include="Players.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerBlack.cpp" />
     <ClCompile Include="PlayerWite.cpp" />
@@ -163,12 +175,26 @@
     <ClCompile Include="WhiteFigure.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseView.h" />
     <ClInclude Include="BlackFigure.h" />
+    <ClInclude Include="Board.h" />
     <ClInclude Include="ChessBoard.h" />
+    <ClInclude Include="ChessBoardView.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Figure.h" />
+    <ClInclude Include="FigureView1.h" />
+    <ClInclude Include="FigureView2.h" />
+    <ClInclude Include="FigureBase.h" />
+    <ClInclude Include="FiguresView.h" />
+    <ClInclude Include="FigureViewBase.h" />
+    <ClInclude Include="IListener.h" />
     <ClInclude Include="IMoveFigure.h" />
     <ClInclude Include="IGameEntity.h" />
+    <ClInclude Include="ISubject.h" />
+    <ClInclude Include="Player1.h" />
+    <ClInclude Include="Player2.h" />
+    <ClInclude Include="PlayerBase.h" />
+    <ClInclude Include="Players.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBlack.h" />
     <ClInclude Include="PlayerWite.h" />

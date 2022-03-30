@@ -1,9 +1,13 @@
 ﻿#include "stdafx.h"
 #include "Engine.h"
-#include "Figure.h"
-#include "PlayerBlack.h"
-#include "PlayerWite.h"
 
+#include "FigureBase.h"
+#include "FigureView1.h"
+#include "FigureView2.h"
+#include "PlayerBase.h"
+#include "PlayerBlack.h"
+
+class Textures;
 /**
  * \brief Конструктор
  */
@@ -27,33 +31,65 @@ void Engine::Init()
 	                "Simple Game Engine",
 	                sf::Style::Fullscreen);
 
-	m_chessBoard.Init();
-	const auto chessBoardSize = m_chessBoard.GetSize();
+	m_players.InitAll();
+	
+	m_chessBoardView.Init();
+	const auto chessBoardSize = m_chessBoardView.GetSize();
 
 	const float scale = 0.9f * static_cast<float>(resolution.y) / static_cast<float>(chessBoardSize.y);
 
-	m_chessBoard.SetScale(scale);
-	m_chessBoard.UpdateScale();
+	m_chessBoardView.SetScale(scale);
+	m_chessBoardView.UpdateScale(resolution);
 
-	players.emplace_back(new PlayerWite());
-	players.emplace_back(new PlayerBlack());
-	players.front()->SetActive();
+	m_figuresView.Init();
 
-	for (auto&& player : players)
+
+	
+	for (const auto& element : m_figuresView.GetPlayerFiguresView())
 	{
-		player->SetScale(scale);
-		player->Init();
-
-		for (auto&& item : player->GetFigures())
+		for (const auto& item : element)
 		{
-			item->SetStep(static_cast<float>(m_chessBoard.GetCellSize()));
-			item->SetCurrentPosition(m_chessBoard.ConvertCageNumberToGlobalCoordinate(item->GetCurrentCell()));
-
-			m_chessBoard.ChangeOcupateCells(item->GetCurrentCell());
+			item->SetBoard(&m_chessBoardView);
+			item->SetScale(scale);
 		}
 	}
 
-	SelectNextFigure();
+	// Подписываемся нак события изменения селекта
+	for (int i = 0; i < 2; ++i)
+	{
+		auto figureView = m_figuresView.GetPlayerFiguresView()[i];
+		auto figureModel = m_players.GetPlayers()[i]->GetFigure();
+
+		for (int j = 0; j < 9; ++j)
+		{
+			figureModel[j]->AddListener(&m_figuresView);
+			figureModel[j]->AddListener(figureView[j].get());
+		}
+	}
+
+	m_players.UpdateFigurePosition();
+
+
+
+	//players.emplace_back(new PlayerWite());
+	//players.emplace_back(new PlayerBlack());
+	//players.front()->SetActive();
+
+	//for (auto&& player : players)
+	//{
+	//	player->SetScale(scale);
+	//	player->Init();
+
+	//	for (auto&& item : player->GetFigures())
+	//	{
+	//		item->SetStep(static_cast<float>(m_chessBoard.GetCellSize()));
+	//		item->SetCurrentPosition(m_chessBoard.ConvertCageNumberToGlobalCoordinate(item->GetCurrentCell()));
+
+	//		m_chessBoard.ChangeOcupateCells(item->GetCurrentCell());
+	//	}
+	//}
+
+	//SelectNextFigure();
 }
 
 Engine::~Engine()
@@ -86,35 +122,35 @@ void Engine::Start()
  * \brief Метод получения активного игрока
  * \return - указатель на активного игрока
  */
-Player* Engine::GetActivePlayer() const
-{
-	Player* result = nullptr;
-
-	const auto iterator = std::find_if(players.begin(), players.end(), [](Player* item) { return item->IsActive(); });
-	if (iterator != players.end())
-	{
-		result = *iterator;
-	}
-	return result;
-}
+//Player* Engine::GetActivePlayer() const
+//{
+//	Player* result = nullptr;
+//
+//	const auto iterator = std::find_if(players.begin(), players.end(), [](Player* item) { return item->IsActive(); });
+//	if (iterator != players.end())
+//	{
+//		result = *iterator;
+//	}
+//	return result;
+//}
 
 /**
  * \brief Метод переключения активного игрока
  */
-void Engine::ChangeActivePlayer()
-{
-	auto iterator = std::find_if(players.begin(), players.end(), [](const auto item) {return item->IsActive(); });
-
-	(*iterator)->SetPassive();
-	if (++iterator == players.end())
-	{
-		(*players.begin())->SetActive();
-	}
-	else
-	{
-		(*iterator)->SetActive();
-	}
-}
+//void Engine::ChangeActivePlayer()
+//{
+//	//auto iterator = std::find_if(players.begin(), players.end(), [](const auto item) { return item->IsActive(); });
+//
+//	//(*iterator)->SetPassive();
+//	//if (++iterator == players.end())
+//	//{
+//	//	(*players.begin())->SetActive();
+//	//}
+//	//else
+//	//{
+//	//	(*iterator)->SetActive();
+//	//}
+//}
 
 /**
  * \brief Метод обработки событий
@@ -143,21 +179,20 @@ void Engine::Events()
  */
 void Engine::Input()
 {
-	const auto activeFigures = GetActivePlayer()->GetFigures();
-	const int selectIndex = GetActivePlayer()->GetIndexSelectedFigure();
+	//const auto activeFigures = GetActivePlayer()->GetFigures();
+	//const int selectIndex = GetActivePlayer()->GetIndexSelectedFigure();
 
-	const auto activeFigure = activeFigures[selectIndex];
+	//const auto activeFigure = activeFigures[selectIndex];
 
 	if (KeyPress(sf::Keyboard::Escape))
 	{
 		m_Window.close();
 	}
-	else if (KeyPress(sf::Keyboard::W) && activeFigure->IsMoved() == false)
+	/*else if (KeyPress(sf::Keyboard::W) && activeFigure->IsMoved() == false)
 	{
-		auto newCell = m_chessBoard.GetCellFromTheTop(activeFigure->GetCurrentCell());
+		const auto newCell = m_chessBoard.GetCellFromTheTop(activeFigure->GetCurrentCell());
 		if (m_chessBoard.CanMoveToCell(newCell))
 		{
-
 			activeFigure->SetCurrentCell(newCell);
 			m_chessBoard.ChangeOcupateCells(newCell);
 			ChangeActivePlayer();
@@ -203,10 +238,10 @@ void Engine::Input()
 			SelectNextFigure();
 			activeFigure->MovingLeft();
 		}
-	}
+	}*/
 	else if (KeyPress(sf::Keyboard::Up))
 	{
-		SelectNextFigure();
+		m_players.GetActivePlayer()->ChangeSelectFigure();
 	}
 }
 
@@ -215,27 +250,27 @@ void Engine::Input()
  */
 void Engine::SelectNextFigure()
 {
-	for (const auto player : players)
-	{
-		if(player->IsActive() == false)
-		{
-			player->UnselectAllFigure();
-		}
-	}
+	//for (const auto player : players)
+	//{
+	//	if (player->IsActive() == false)
+	//	{
+	//		player->UnselectAllFigure();
+	//	}
+	//}
 
-	const auto activeFigur = GetActivePlayer()->GetFigures();
-	int selectIndex = GetActivePlayer()->GetIndexSelectedFigure();
-	do
-	{
-		if (selectIndex < activeFigur.size() - 1)
-			selectIndex++;
-		else
-			selectIndex = 0;
-	}
-	while (!m_chessBoard.ThereAreMoves(activeFigur[selectIndex]->GetCurrentCell()));
+	//const auto activeFigur = GetActivePlayer()->GetFigures();
+	//int selectIndex = GetActivePlayer()->GetIndexSelectedFigure();
+	//do
+	//{
+	//	if (selectIndex < activeFigur.size() - 1)
+	//		selectIndex++;
+	//	else
+	//		selectIndex = 0;
+	//}
+	//while (!m_chessBoard.ThereAreMoves(activeFigur[selectIndex]->GetCurrentCell()));
 
-	GetActivePlayer()->UnselectAllFigure();
-	activeFigur[selectIndex]->Select();
+	//GetActivePlayer()->UnselectAllFigure();
+	//activeFigur[selectIndex]->Select();
 }
 
 /**
@@ -244,13 +279,13 @@ void Engine::SelectNextFigure()
  */
 void Engine::Update(float dtAsSeconds)
 {
-	for (const auto& player : players)
+	/*for (const auto& player : players)
 	{
 		for (const auto& item : player->GetFigures())
 		{
-			item->Update(dtAsSeconds);
+			item->UpdateState(dtAsSeconds);
 		}
-	}
+	}*/
 }
 
 /**
@@ -263,19 +298,22 @@ void Engine::Draw()
 
 	// Отрисовываем фон
 	m_Window.draw(m_BackgroundSprite);
+	m_Window.draw(m_Sprite);
 
 	// Отрисовываем доску
-	m_Window.draw(m_chessBoard.GetSprite());
+	m_Window.draw(m_chessBoardView.GetSprite());
+
 
 	// Отрисовываем фигуры всех игроков на доске
-	for (const auto& player : players)
+	for (const auto& element : m_figuresView.GetPlayerFiguresView())
 	{
-		for (const auto& item : player->GetFigures())
+		for (auto item : element)
 		{
 			m_Window.draw(item->GetSprite());
 		}
 	}
 
+	
 	// Отображаем все, что нарисовали
 	m_Window.display();
 }

@@ -4,10 +4,10 @@
 //TODO убрать в конфиг cellSize
 ChessBoard::ChessBoard(): m_scale(1.0f), m_cellSize(63)
 {
-	m_globalPossition = sf::Vector2f(0.f, 0.f);
+	m_globalPosition = sf::Vector2f(0.f, 0.f);
 	//TODO убрать в конфиг
-	m_firstCellLocalPossition.x = 127;
-	m_firstCellLocalPossition.y = 627;
+	m_firstCellLocalPosition.x = 127;
+	m_firstCellLocalPosition.y = 627;
 
 	// Получаем разрешение экрана, создаем окно SFML и View
 	m_resolution.x = sf::VideoMode::getDesktopMode().width;
@@ -16,7 +16,6 @@ ChessBoard::ChessBoard(): m_scale(1.0f), m_cellSize(63)
 
 void ChessBoard::Init()
 {
-	
 	// Связываем текстуру и спрайт
 	//TODO убрать в конфиг название текстуры
 	m_Texture.loadFromFile("board.jpg");
@@ -27,10 +26,10 @@ void ChessBoard::Init()
 
 sf::Vector2f ChessBoard::ConvertCageNumberToGlobalCoordinate(BoardCell currentCell) const
 {
-	sf::Vector2f result = m_globalPossition;
+	sf::Vector2f result = m_globalPosition;
 
-	result.x += (m_firstCellLocalPossition.x + (currentCell.Col - 1) * m_cellSize) * m_scale;
-	result.y += (m_firstCellLocalPossition.y - currentCell.Row * m_cellSize) * m_scale;
+	result.x += (m_firstCellLocalPosition.x + (currentCell.Col - 1) * m_cellSize) * m_scale;
+	result.y += (m_firstCellLocalPosition.y - currentCell.Row * m_cellSize) * m_scale;
 
 	return result;
 }
@@ -68,10 +67,10 @@ void ChessBoard::UpdateScale()
 {
 	m_Sprite.setScale(m_scale, m_scale);
 
-	m_globalPossition.x = (m_resolution.x - m_Texture.getSize().x * m_scale) / 2.0;
-	m_globalPossition.y = 0.05f * m_resolution.y;
+	m_globalPosition.x = (m_resolution.x - m_Texture.getSize().x * m_scale) / 2.0;
+	m_globalPosition.y = (m_resolution.y - m_Texture.getSize().y * m_scale) / 2.0;
 
-	m_Sprite.setPosition(m_globalPossition);
+	m_Sprite.setPosition(m_globalPosition);
 }
 
 

@@ -1,16 +1,13 @@
 ﻿// ****************************************************************************
-//  WhiteFigure.h
-//	Класс белых фигур
+//  ISubject.h
+//  TODO краткое описание класса
 // ****************************************************************************
 
 #pragma once
-#include "Figure.h"
 
-class WhiteFigure final : public Figure
+class ISubjectView
 {
 public:
-	WhiteFigure();
-	~WhiteFigure() override;
-
-	void Init() override;
+	virtual void UpdateState() = 0 ;
+	virtual void UpdatePosition(BoardCell position) = 0 ;
 };

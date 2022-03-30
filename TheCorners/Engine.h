@@ -3,7 +3,11 @@
 //  Класс игрового движка
 // ****************************************************************************
 #pragma once
+#include "Board.h"
 #include "ChessBoard.h"
+#include "ChessBoardView.h"
+#include "FiguresView.h"
+#include "Players.h"
 #include "Player.h"
 
 class Engine
@@ -22,15 +26,23 @@ private:
 	sf::RenderWindow m_Window;
 
 
-	std::vector<Player*> players;
-	Player* GetActivePlayer() const;
-	void ChangeActivePlayer();
+	//std::vector<Player*> players;
+	//Player* GetActivePlayer() const;
+	//void ChangeActivePlayer();
 
-	ChessBoard m_chessBoard;
+	View::ChessBoardView m_chessBoardView;
+	View::FiguresView m_figuresView;
+
+
+	Model::Board m_chessBoard;
+	Model::Players m_players;
+
 
 	// Объявляем спрайт и текстуру для фона
 	sf::Sprite m_BackgroundSprite;
 	sf::Texture m_BackgroundTexture;
+
+	sf::Sprite m_Sprite;
 
 	void Input();
 	void SelectNextFigure();

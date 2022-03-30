@@ -11,7 +11,7 @@ class Figure : public IMoveFigure
 {
 public:
 	Figure();
-	virtual ~Figure();
+	~Figure() override;
 
 	virtual void Init();
 

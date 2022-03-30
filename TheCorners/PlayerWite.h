@@ -6,9 +6,8 @@
 #pragma once
 #include "Player.h"
 
-class PlayerWite final : public Player 
+class PlayerWite final : public Player
 {
 public:
 	void Init() override;
-	
 };

@@ -6,7 +6,7 @@
 #pragma once
 #include "Player.h"
 
-class PlayerBlack  final : public Player
+class PlayerBlack final : public Player
 {
 public:
 	void Init() override;

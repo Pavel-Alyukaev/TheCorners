@@ -1,16 +1,16 @@
 ﻿// ****************************************************************************
-//  WhiteFigure.h
-//	Класс белых фигур
+//  Player1.h
+//  TODO краткое описание класса
 // ****************************************************************************
 
 #pragma once
-#include "Figure.h"
-
-class WhiteFigure final : public Figure
+#include "PlayerBase.h"
+namespace Model
+{
+class Player1 final : public PlayerBase
 {
 public:
-	WhiteFigure();
-	~WhiteFigure() override;
-
+	~Player1() override;
 	void Init() override;
 };
+}

@@ -32,8 +32,4 @@ protected:
 
 private:
 	bool m_isActive;
-
-
 };
-
-
