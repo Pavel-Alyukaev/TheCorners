@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "FigureBase.h"
 
-#include "FigureViewBase.h"
+#include "..\..\View\Figure\FigureViewBase.h"
 namespace Model
 {
 FigureBase::FigureBase()
@@ -13,25 +13,21 @@ FigureBase::~FigureBase()
 void FigureBase::MovingForward()
 {
 	m_currentCell.Row -= 1;
-	NotifyAllNewPosition();
 }
 
 void FigureBase::MovingLeft()
 {
 	m_currentCell.Col -= 1;
-	NotifyAllNewPosition();
 }
 
 void FigureBase::MovingRight()
 {
 	m_currentCell.Col += 1;
-	NotifyAllNewPosition();
 }
 
 void FigureBase::MovingBackward()
 {
 	m_currentCell.Row += 1;
-	NotifyAllNewPosition();
 }
 
 void FigureBase::AddListener(ISubjectView* listener)

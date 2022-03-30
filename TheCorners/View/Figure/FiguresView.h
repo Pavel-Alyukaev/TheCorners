@@ -4,7 +4,7 @@
 // ****************************************************************************
 
 #pragma once
-#include "ISubject.h"
+#include "..\..\ISubject.h"
 namespace View
 {
 class ChessBoardView;

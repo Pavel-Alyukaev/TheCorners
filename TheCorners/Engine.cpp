@@ -1,10 +1,10 @@
 ﻿#include "stdafx.h"
 #include "Engine.h"
 
-#include "FigureBase.h"
-#include "FigureView1.h"
-#include "FigureView2.h"
-#include "PlayerBase.h"
+#include "Model\Figure\FigureBase.h"
+#include "View\Figure\FigureView1.h"
+#include "View\Figure\FigureView2.h"
+#include "Model\Players\PlayerBase.h"
 #include "PlayerBlack.h"
 
 class Textures;
@@ -62,15 +62,20 @@ void Engine::Init()
 
 		for (int j = 0; j < 9; ++j)
 		{
-			figureModel[j]->AddListener(&m_figuresView);
+			//figureModel[j]->AddListener(&m_figuresView);
 			figureModel[j]->AddListener(figureView[j].get());
 		}
 	}
 
 	m_players.UpdateFigurePosition();
 
-
-
+	for (const auto& player : m_players.GetPlayers())
+	{
+		for (const auto& item : player->GetFigure())
+		{
+			m_chessBoard.ChangeOccupiedCell(item->GetCurrentCell(), item->GetCurrentCell());
+		}
+	}
 	//players.emplace_back(new PlayerWite());
 	//players.emplace_back(new PlayerBlack());
 	//players.front()->SetActive();
@@ -179,28 +184,24 @@ void Engine::Events()
  */
 void Engine::Input()
 {
-	//const auto activeFigures = GetActivePlayer()->GetFigures();
-	//const int selectIndex = GetActivePlayer()->GetIndexSelectedFigure();
-
-	//const auto activeFigure = activeFigures[selectIndex];
-
 	if (KeyPress(sf::Keyboard::Escape))
 	{
 		m_Window.close();
 	}
-	/*else if (KeyPress(sf::Keyboard::W) && activeFigure->IsMoved() == false)
+	else if (KeyPress(sf::Keyboard::W))
 	{
+		const auto activeFigure = m_players.GetActivePlayer()->GetSelectFigure();
 		const auto newCell = m_chessBoard.GetCellFromTheTop(activeFigure->GetCurrentCell());
 		if (m_chessBoard.CanMoveToCell(newCell))
 		{
+			m_chessBoard.ChangeOccupiedCell(activeFigure->GetCurrentCell(), newCell);
 			activeFigure->SetCurrentCell(newCell);
-			m_chessBoard.ChangeOcupateCells(newCell);
-			ChangeActivePlayer();
-			SelectNextFigure();
-			activeFigure->MovingForward();
+			m_players.ChangeActivePlayer();
+
+			//activeFigure->MovingForward();
 		}
 	}
-	else if (KeyPress(sf::Keyboard::D) && activeFigure->IsMoved() == false)
+	/*else if (KeyPress(sf::Keyboard::D) && activeFigure->IsMoved() == false)
 	{
 		const auto newCell = m_chessBoard.GetCellOnTheRight(
 			activeFigures[GetActivePlayer()->GetIndexSelectedFigure()]->GetCurrentCell());
@@ -241,37 +242,28 @@ void Engine::Input()
 	}*/
 	else if (KeyPress(sf::Keyboard::Up))
 	{
-		m_players.GetActivePlayer()->ChangeSelectFigure();
+
+		auto bb = m_players.GetActivePlayer()->GetFigure();
+		auto aa = m_players.GetActivePlayer()->GetSelectFigure();
+
+		auto iterator = std::find_if(bb.begin(), bb.end(), [&](const auto& item)
+			{
+				return item->GetCurrentCell() == aa->GetCurrentCell();
+			});
+
+		do
+		{
+			if (++iterator == bb.end())
+			{
+				iterator = bb.begin();
+			}
+		} while (m_chessBoard.ThereAreMoves((*iterator)->GetCurrentCell()) == false);
+		
+
+		m_players.GetActivePlayer()->ChangeSelectFigure(*iterator);
 	}
 }
 
-/**
- * \brief Метод определения выбранного объекта
- */
-void Engine::SelectNextFigure()
-{
-	//for (const auto player : players)
-	//{
-	//	if (player->IsActive() == false)
-	//	{
-	//		player->UnselectAllFigure();
-	//	}
-	//}
-
-	//const auto activeFigur = GetActivePlayer()->GetFigures();
-	//int selectIndex = GetActivePlayer()->GetIndexSelectedFigure();
-	//do
-	//{
-	//	if (selectIndex < activeFigur.size() - 1)
-	//		selectIndex++;
-	//	else
-	//		selectIndex = 0;
-	//}
-	//while (!m_chessBoard.ThereAreMoves(activeFigur[selectIndex]->GetCurrentCell()));
-
-	//GetActivePlayer()->UnselectAllFigure();
-	//activeFigur[selectIndex]->Select();
-}
 
 /**
  * \brief Мметод обновления положения всех объектов
@@ -279,14 +271,22 @@ void Engine::SelectNextFigure()
  */
 void Engine::Update(float dtAsSeconds)
 {
-	/*for (const auto& player : players)
-	{
-		for (const auto& item : player->GetFigures())
+	sf::Vector2f local;
+		for (const auto& element : m_figuresView.GetPlayerFiguresView())
 		{
-			item->UpdateState(dtAsSeconds);
+			for (auto item : element)
+			{
+				 local = item->GetLocalCoordinateToMove(dtAsSeconds);
+				
+				//auto qq = m_chessBoardView.ConvertCageNumberToGlobalCoordinate(item->GetCurrentPosition());
+
+				//auto newPosition = qq + local;
+
+				//item->GetSprite().setPosition(newPosition);
+			}
 		}
-	}*/
-}
+	}
+
 
 /**
  * \brief  Мметод перерисовки всех объектов
@@ -303,7 +303,6 @@ void Engine::Draw()
 	// Отрисовываем доску
 	m_Window.draw(m_chessBoardView.GetSprite());
 
-
 	// Отрисовываем фигуры всех игроков на доске
 	for (const auto& element : m_figuresView.GetPlayerFiguresView())
 	{
@@ -313,7 +312,6 @@ void Engine::Draw()
 		}
 	}
 
-	
 	// Отображаем все, что нарисовали
 	m_Window.display();
 }

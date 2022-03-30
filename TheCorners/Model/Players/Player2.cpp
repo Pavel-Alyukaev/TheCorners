@@ -1,16 +1,17 @@
 ﻿#include "stdafx.h"
-#include "Player1.h"
+#include "Player2.h"
 
-#include "FigureBase.h"
+#include "..\Figure\FigureBase.h"
+#include "PlayerBase.h"
 
 namespace Model
 {
-Player1::~Player1()
+Player2::~Player2()
 {
 	m_figures.clear();
 }
 
-void Player1::Init()
+void Player2::Init()
 {
 	m_figures.clear();
 	for (int i = 1; i < 4; ++i)
@@ -18,7 +19,7 @@ void Player1::Init()
 		for (int r = 8; r >= 6; --r)
 		{
 			m_figures.emplace_back(std::make_shared<FigureBase>());
-			m_figures.back()->SetCurrentCell({r, i});
+			m_figures.back()->SetCurrentCell({i, r});
 		}
 	}
 	m_selectFigure = m_figures.front();

@@ -5,20 +5,6 @@ namespace Model
 {
 	void Board::Update()
 	{
-		CalculateCellsFromWhichCanMove();
-	}
-
-	void Board::CalculateCellsFromWhichCanMove()
-	{
-		m_cellsFromWhichCanMove.clear();
-
-		for (auto cell : m_occupiedCells)
-		{
-			if (ThereAreMoves(cell) == true)
-			{
-				m_cellsFromWhichCanMove.emplace_back(cell);
-			}
-		}
 	}
 
 	BoardCell Board::GetCellOnTheRight(BoardCell currentCell) const
@@ -50,23 +36,31 @@ namespace Model
 		return currentCell.Col > 0 && currentCell.Col < 9 && currentCell.Row > 0 && currentCell.Row < 9;
 	}
 
-	bool Board::ThereAreMoves(BoardCell currCell) const
+	bool Board::ThereAreMoves(BoardCell currentCell) const
 	{
-		BoardCell cell = GetCellFromTheTop(currCell);
+		BoardCell cell = GetCellFromTheTop(currentCell);
 		const bool forward = CanMoveToCell(cell);
-		cell = GetCellFromTheBottom(currCell);
+		cell = GetCellFromTheBottom(currentCell);
 		const bool backward = CanMoveToCell(cell);
-		cell = GetCellOnTheLeft(currCell);
+		cell = GetCellOnTheLeft(currentCell);
 		const bool left = CanMoveToCell(cell);
-		cell = GetCellOnTheRight(currCell);
+		cell = GetCellOnTheRight(currentCell);
 		const bool right = CanMoveToCell(cell);
 
 		return forward || backward || left || right;
 	}
 
+	void Board::ChangeOccupiedCell(BoardCell oldCell, BoardCell newCell)
+	{
+		const auto iter = std::find(m_occupiedCells.begin(), m_occupiedCells.end(), oldCell);
+
+		iter == m_occupiedCells.end() ? m_occupiedCells.emplace_back(newCell) : *iter = newCell;
+	}
+
 	bool Board::CanMoveToCell(BoardCell currentCell) const
 	{
 		return std::none_of(m_occupiedCells.begin(), m_occupiedCells.end(),
-			[&currentCell](const auto& item) { return item == currentCell; }) && CheckBorder(currentCell);
+							[&currentCell](const auto& item) { return item == currentCell; }) &&
+			CheckBorder(currentCell);
 	}
 }

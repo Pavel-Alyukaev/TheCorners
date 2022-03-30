@@ -3,12 +3,13 @@
 //  Класс игрового движка
 // ****************************************************************************
 #pragma once
-#include "Board.h"
+#include "Model\Board\Board.h"
 #include "ChessBoard.h"
-#include "ChessBoardView.h"
-#include "FiguresView.h"
-#include "Players.h"
+#include "Model\Players\Players.h"
 #include "Player.h"
+
+#include "View/ChessBoard/ChessBoardView.h"
+#include "View/Figure/FiguresView.h"
 
 class Engine
 {

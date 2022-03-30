@@ -6,9 +6,8 @@
 #pragma once
 #include <list>
 
-#include "FigureView1.h"
-#include "IListener.h"
-#include "IMoveFigure.h"
+#include "..\..\IListener.h"
+#include "..\..\IMoveFigure.h"
 class ISubjectView;
 namespace View
 {

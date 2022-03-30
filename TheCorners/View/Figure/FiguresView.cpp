@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "FiguresView.h"
 
-#include "ChessBoardView.h"
 #include "FigureView1.h"
 #include "FigureView2.h"
 namespace View

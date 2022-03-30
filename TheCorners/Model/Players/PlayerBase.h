@@ -24,7 +24,9 @@ public:
 	void MovingRight();
 	void MovingBackward();
 
-	void ChangeSelectFigure();
+	void ChangeSelectFigure(std::shared_ptr<FigureBase>);
+
+	std::shared_ptr<FigureBase> GetSelectFigure();
 
 	std::vector<std::shared_ptr<FigureBase>> GetFigure();  
 

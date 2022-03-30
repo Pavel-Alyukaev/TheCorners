@@ -4,7 +4,8 @@
 // ****************************************************************************
 
 #pragma once
-#include "BaseView.h"
+#include "..\BaseView.h"
+
 namespace View
 {
 class ChessBoardView final : public BaseView

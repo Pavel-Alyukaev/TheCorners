@@ -29,4 +29,9 @@ struct BoardCell
 	{
 		return Row == right.Row && Col == right.Col;
 	}
+
+	BoardCell operator -(const BoardCell& right) const
+	{
+		return BoardCell({ Row - right.Row, Col - right.Col });
+	}
 };

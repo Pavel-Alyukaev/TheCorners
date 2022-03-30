@@ -66,41 +66,41 @@
     <ClCompile Include="PlayerBlack.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Players.cpp">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBase.cpp">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="Player1.cpp">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="Player2.cpp">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="FigureBase.cpp">
-      <Filter>Исходные файлы\Model\Figure</Filter>
-    </ClCompile>
-    <ClCompile Include="Board.cpp">
-      <Filter>Исходные файлы\Model\Board</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseView.cpp">
-      <Filter>Исходные файлы\View</Filter>
-    </ClCompile>
-    <ClCompile Include="ChessBoardView.cpp">
+    <ClCompile Include="View\ChessBoard\ChessBoardView.cpp">
       <Filter>Исходные файлы\View\ChessBoard</Filter>
     </ClCompile>
-    <ClCompile Include="FiguresView.cpp">
+    <ClCompile Include="View\Figure\FiguresView.cpp">
       <Filter>Исходные файлы\View\Figure</Filter>
     </ClCompile>
-    <ClCompile Include="FigureView1.cpp">
+    <ClCompile Include="View\Figure\FigureView1.cpp">
       <Filter>Исходные файлы\View\Figure</Filter>
     </ClCompile>
-    <ClCompile Include="FigureView2.cpp">
+    <ClCompile Include="View\Figure\FigureView2.cpp">
       <Filter>Исходные файлы\View\Figure</Filter>
     </ClCompile>
-    <ClCompile Include="FigureViewBase.cpp">
+    <ClCompile Include="View\Figure\FigureViewBase.cpp">
       <Filter>Исходные файлы\View\Figure</Filter>
+    </ClCompile>
+    <ClCompile Include="View\BaseView.cpp">
+      <Filter>Исходные файлы\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Players\Player1.cpp">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Players\Player2.cpp">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Players\PlayerBase.cpp">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Players\Players.cpp">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Board\Board.cpp">
+      <Filter>Исходные файлы\Model\Board</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Figure\FigureBase.cpp">
+      <Filter>Исходные файлы\Model\Figure</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,44 +140,44 @@
     <ClInclude Include="IListener.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="Players.h">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBase.h">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="Player1.h">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="Player2.h">
-      <Filter>Исходные файлы\Model\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="FigureBase.h">
-      <Filter>Исходные файлы\Model\Figure</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Исходные файлы\Model\Board</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseView.h">
-      <Filter>Исходные файлы\View</Filter>
-    </ClInclude>
     <ClInclude Include="ISubject.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
-    <ClInclude Include="ChessBoardView.h">
+    <ClInclude Include="View\ChessBoard\ChessBoardView.h">
       <Filter>Исходные файлы\View\ChessBoard</Filter>
     </ClInclude>
-    <ClInclude Include="FiguresView.h">
+    <ClInclude Include="View\Figure\FiguresView.h">
       <Filter>Исходные файлы\View\Figure</Filter>
     </ClInclude>
-    <ClInclude Include="FigureView1.h">
+    <ClInclude Include="View\Figure\FigureView1.h">
       <Filter>Исходные файлы\View\Figure</Filter>
     </ClInclude>
-    <ClInclude Include="FigureView2.h">
+    <ClInclude Include="View\Figure\FigureView2.h">
       <Filter>Исходные файлы\View\Figure</Filter>
     </ClInclude>
-    <ClInclude Include="FigureViewBase.h">
+    <ClInclude Include="View\Figure\FigureViewBase.h">
       <Filter>Исходные файлы\View\Figure</Filter>
+    </ClInclude>
+    <ClInclude Include="View\BaseView.h">
+      <Filter>Исходные файлы\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Players\Player1.h">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Players\Player2.h">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Players\PlayerBase.h">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Players\Players.h">
+      <Filter>Исходные файлы\Model\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Board\Board.h">
+      <Filter>Исходные файлы\Model\Board</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Figure\FigureBase.h">
+      <Filter>Исходные файлы\Model\Figure</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

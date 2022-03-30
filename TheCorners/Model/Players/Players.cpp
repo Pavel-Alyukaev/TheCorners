@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Players.h"
 
-#include "FigureBase.h"
+#include "..\Figure\FigureBase.h"
 #include "Player1.h"
 #include "Player2.h"
 
