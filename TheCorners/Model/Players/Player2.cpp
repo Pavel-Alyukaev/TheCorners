@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
 #include "Player2.h"
 
-#include "..\Figure\FigureBase.h"
 #include "PlayerBase.h"
+#include "../Figure/FigureBase.h"
 
 namespace Model
 {

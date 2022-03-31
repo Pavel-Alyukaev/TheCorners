@@ -44,8 +44,5 @@ void FiguresView::UpdateState()
 
 void FiguresView::UpdatePosition(BoardCell position)
 {
-
 }
-
-
 }

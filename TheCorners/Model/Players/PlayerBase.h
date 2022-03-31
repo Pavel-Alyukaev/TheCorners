@@ -1,6 +1,6 @@
 ﻿// ****************************************************************************
 //  PlayerBase.h
-//  TODO краткое описание класса
+//  Базовый класс игроков
 // ****************************************************************************
 
 #pragma once
@@ -17,18 +17,45 @@ public:
 
 	virtual ~PlayerBase() = default;
 
+	/**
+	 * \brief Инициализация игрока
+	 */
 	virtual void Init() = 0;
 
+	/**
+	 * \brief перемещение вперед
+	 */
 	void MovingForward();
+	/**
+	 * \brief перемещение влево
+	 */
 	void MovingLeft();
+	/**
+	 * \brief Перемещение вправо
+	 */
 	void MovingRight();
+	/**
+	 * \brief Перемещение назад
+	 */
 	void MovingBackward();
 
-	void ChangeSelectFigure(std::shared_ptr<FigureBase>);
+	/**
+	 * \brief Задать выбранную фигуру
+	 * \param figure - Указатель на фигуру
+	 */
+	void SetSelectFigure(std::shared_ptr<FigureBase> figure);
 
+	/**
+	 * \brief Получить выбранную фигуру
+	 * \return Указатель на фигуру
+	 */
 	std::shared_ptr<FigureBase> GetSelectFigure();
 
-	std::vector<std::shared_ptr<FigureBase>> GetFigure();  
+	/**
+	 * \brief Получить все фигуры игрока
+	 * \return Вектор фигур
+	 */
+	std::vector<std::shared_ptr<FigureBase>> GetFigures();
 
 protected:
 	std::vector<std::shared_ptr<FigureBase>> m_figures;

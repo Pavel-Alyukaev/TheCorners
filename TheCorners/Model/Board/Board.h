@@ -1,32 +1,31 @@
 ﻿// ****************************************************************************
 //  Board.h
-//  TODO краткое описание класса
+//  Класс игровой доски
 // ****************************************************************************
 
 #pragma once
 
 namespace Model
 {
-	class Board
-	{
-	public:
-		void Update();
-		[[nodiscard]] bool CanMoveToCell(BoardCell currentCell) const;
+class Board
+{
+public:
+	void Update();
+	[[nodiscard]] bool CanMoveToCell(BoardCell currentCell) const;
 
 
-		bool ThereAreMoves(BoardCell currentCell) const;
+	bool ThereAreMoves(BoardCell currentCell) const;
 
-		void ChangeOccupiedCell(BoardCell oldCell, BoardCell newCell);
+	void ChangeOccupiedCell(BoardCell oldCell, BoardCell newCell);
 
-		BoardCell GetCellOnTheRight(BoardCell currentCell) const;
-		BoardCell GetCellFromTheTop(BoardCell currentCell) const;
-		BoardCell GetCellOnTheLeft(BoardCell currentCell) const;
-		BoardCell GetCellFromTheBottom(BoardCell currentCell) const;
+	BoardCell GetCellOnTheRight(BoardCell currentCell) const;
+	BoardCell GetCellFromTheTop(BoardCell currentCell) const;
+	BoardCell GetCellOnTheLeft(BoardCell currentCell) const;
+	BoardCell GetCellFromTheBottom(BoardCell currentCell) const;
 
-	private:
+private:
+	bool CheckBorder(BoardCell currentCell) const;
 
-		bool CheckBorder(BoardCell currentCell) const;
-
-		std::vector<BoardCell> m_occupiedCells;
-	};
+	std::vector<BoardCell> m_occupiedCells;
+};
 }

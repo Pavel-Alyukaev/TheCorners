@@ -3,11 +3,8 @@
 //  Класс игрового движка
 // ****************************************************************************
 #pragma once
-#include "Model\Board\Board.h"
-#include "ChessBoard.h"
-#include "Model\Players\Players.h"
-#include "Player.h"
-
+#include "Model/Board/Board.h"
+#include "Model/Players/Players.h"
 #include "View/ChessBoard/ChessBoardView.h"
 #include "View/Figure/FiguresView.h"
 

@@ -32,6 +32,11 @@ struct BoardCell
 
 	BoardCell operator -(const BoardCell& right) const
 	{
-		return BoardCell({ Row - right.Row, Col - right.Col });
+		return BoardCell({Col - right.Col, Row - right.Row});
+	}
+
+	BoardCell operator +(const BoardCell& right) const
+	{
+		return BoardCell({Col + right.Col, Row + right.Row});
 	}
 };

@@ -148,10 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BlackFigure.cpp" />
-    <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="Engine.cpp" />
-    <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Board\Board.cpp" />
     <ClCompile Include="Model\Figure\FigureBase.cpp" />
@@ -159,9 +156,6 @@
     <ClCompile Include="Model\Players\Player2.cpp" />
     <ClCompile Include="Model\Players\PlayerBase.cpp" />
     <ClCompile Include="Model\Players\Players.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerBlack.cpp" />
-    <ClCompile Include="PlayerWite.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -172,26 +166,20 @@
     <ClCompile Include="View\Figure\FigureView1.cpp" />
     <ClCompile Include="View\Figure\FigureView2.cpp" />
     <ClCompile Include="View\Figure\FigureViewBase.cpp" />
-    <ClCompile Include="WhiteFigure.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BlackFigure.h" />
-    <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="Figure.h" />
+    <ClInclude Include="IConverterCoordinateFromLocalToGlobal.h" />
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMoveFigure.h" />
     <ClInclude Include="IGameEntity.h" />
-    <ClInclude Include="ISubject.h" />
+    <ClInclude Include="ISubjectView.h" />
     <ClInclude Include="Model\Board\Board.h" />
     <ClInclude Include="Model\Figure\FigureBase.h" />
     <ClInclude Include="Model\Players\Player1.h" />
     <ClInclude Include="Model\Players\Player2.h" />
     <ClInclude Include="Model\Players\PlayerBase.h" />
     <ClInclude Include="Model\Players\Players.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerBlack.h" />
-    <ClInclude Include="PlayerWite.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="View\BaseView.h" />
     <ClInclude Include="View\ChessBoard\ChessBoardView.h" />
@@ -199,7 +187,6 @@
     <ClInclude Include="View\Figure\FigureView1.h" />
     <ClInclude Include="View\Figure\FigureView2.h" />
     <ClInclude Include="View\Figure\FigureViewBase.h" />
-    <ClInclude Include="WhiteFigure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

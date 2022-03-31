@@ -1,13 +1,13 @@
 ﻿// ****************************************************************************
 //  FigureBase.h
-//  TODO краткое описание класса
+//  Класс фигуры
 // ****************************************************************************
 
 #pragma once
 #include <list>
 
-#include "..\..\IListener.h"
-#include "..\..\IMoveFigure.h"
+#include "../../Interfaces/IListener.h"
+#include "../../Interfaces/IMoveFigure.h"
 class ISubjectView;
 namespace View
 {

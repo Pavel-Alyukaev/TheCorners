@@ -1,21 +1,17 @@
 ﻿#include "stdafx.h"
 #include "FigureViewBase.h"
 
-#include "..\ChessBoard\ChessBoardView.h"
+#include "../ChessBoard/ChessBoardView.h"
 
 namespace View
 {
-FigureViewBase::FigureViewBase(): m_currentPosition({ -1,-1 }), m_isSelected(false)
+FigureViewBase::FigureViewBase(): m_currentPosition({-1, -1}), m_isSelected(false), m_speed(300), m_isMoved(false)
 {
-	m_isMoved = false;
-	m_Speed = 400;
-	m_step = 400;
 }
 
 void FigureViewBase::Init()
 {
 }
-
 
 void FigureViewBase::Select()
 {
@@ -35,11 +31,6 @@ void FigureViewBase::Unselect()
 	}
 }
 
-void FigureViewBase::MoveTo(sf::Vector2f position)
-{
-	m_Sprite.setPosition(position);
-}
-
 sf::Vector2u FigureViewBase::GetSize() const
 {
 	return m_texture.getSize();
@@ -56,56 +47,64 @@ void FigureViewBase::UpdatePosition(BoardCell position)
 	{
 		m_currentPosition = position;
 		m_endPosition = position;
-		const auto coordinate = m_board->ConvertCageNumberToGlobalCoordinate(m_currentPosition);
-		m_Sprite.setPosition(coordinate);
+		m_globalCoordinate = m_board->ConvertCageNumberToGlobalCoordinate(m_currentPosition);
+		m_Sprite.setPosition(m_globalCoordinate);
 	}
 	else
 	{
 		m_isMoved = true;
 		m_endPosition = position;
 		auto direction = m_endPosition - m_currentPosition;
-		m_direction.x = direction.Col;
-		m_direction.y = direction.Row;
+		m_direction.x = static_cast<float>(direction.Col);
+		m_direction.y = -static_cast<float>(direction.Row);
 	}
 }
 
-void FigureViewBase::SetBoard(ChessBoardView* board)
+void FigureViewBase::SetConverter(IConverterCoordinateFromLocalToGlobal* board)
 {
 	m_board = board;
 }
 
-sf::Vector2f FigureViewBase::GetLocalCoordinateToMove(float elapsedTime)
+void FigureViewBase::Update(float elapsedTime)
 {
-	m_localMovedPosition += m_Speed * elapsedTime;
+	m_localMovedPosition += m_speed * elapsedTime;
 
 	if (m_isMoved && m_localMovedPosition <= m_step)
 	{
-		m_localCoordinate = m_localMovedPosition * (m_direction);
-		m_Sprite.setPosition(m_localCoordinate);
+		m_globalCoordinate += m_localMovedPosition * (m_direction);
 
+		// Теперь сдвигаем спрайт на новую позицию
+		m_Sprite.setPosition(m_globalCoordinate);
 	}
-	else if(m_isMoved)
+	else if (m_isMoved)
 	{
 		m_localMovedPosition = 0.0f;
-		m_localCoordinate = { 0.0f ,0.0f };
+		m_localCoordinate = {0.0f, 0.0f};
 		m_isMoved = false;
 		m_currentPosition = m_endPosition;
-		m_Sprite.setPosition(m_localCoordinate);
+		m_globalCoordinate = m_board->ConvertCageNumberToGlobalCoordinate(m_currentPosition);
 
+		// Теперь сдвигаем спрайт на новую позицию
+		m_Sprite.setPosition(m_globalCoordinate);
 	}
 	else
 	{
 		m_localMovedPosition = 0.0f;
 	}
-
-	//
-
-	// Теперь сдвигаем спрайт на новую позицию
-	return m_localCoordinate;
 }
 
 BoardCell FigureViewBase::GetCurrentPosition() const
 {
 	return m_currentPosition;
+}
+
+void FigureViewBase::CalculateStep()
+{
+	const auto globalCoordinate1 = m_board->ConvertCageNumberToGlobalCoordinate({1, 1});
+
+	const auto globalCoordinate2 = m_board->ConvertCageNumberToGlobalCoordinate({1, 2});
+
+
+	m_step = (globalCoordinate2 - globalCoordinate1).y * m_scale;
 }
 }

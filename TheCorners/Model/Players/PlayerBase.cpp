@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "PlayerBase.h"
 
-#include "..\Figure\FigureBase.h"
+#include "../Figure/FigureBase.h"
 
 namespace Model
 {
@@ -30,26 +30,11 @@ void PlayerBase::MovingBackward()
 	m_selectFigure->MovingBackward();
 }
 
-void PlayerBase::ChangeSelectFigure(std::shared_ptr<FigureBase> figure)
+void PlayerBase::SetSelectFigure(std::shared_ptr<FigureBase> figure)
 {
-	/*auto iterator = std::find_if(m_figures.begin(), m_figures.end(), [&](std::shared_ptr<FigureBase> item)
-	{
-		return item->GetCurrentCell() == m_selectFigure->GetCurrentCell();
-	});
-
-	do
-	{
-		if (++iterator == m_figures.end())
-		{
-			iterator = m_figures.begin();
-		}
-
-	} while (false);*/
-
 	m_selectFigure = figure;
 	m_selectFigure->NotifyAllState();
 	m_selectFigure->NotifyAllNewPosition();
-	
 }
 
 std::shared_ptr<FigureBase> PlayerBase::GetSelectFigure()
@@ -57,7 +42,7 @@ std::shared_ptr<FigureBase> PlayerBase::GetSelectFigure()
 	return m_selectFigure;
 }
 
-std::vector<std::shared_ptr<FigureBase>> PlayerBase::GetFigure()
+std::vector<std::shared_ptr<FigureBase>> PlayerBase::GetFigures()
 {
 	return m_figures;
 }

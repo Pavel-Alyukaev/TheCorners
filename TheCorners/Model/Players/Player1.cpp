@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "Player1.h"
 
-#include "..\Figure\FigureBase.h"
+#include "../Figure/FigureBase.h"
 
 namespace Model
 {

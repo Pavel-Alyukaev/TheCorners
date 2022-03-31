@@ -1,7 +1,7 @@
 ﻿#include "stdafx.h"
 #include "FigureBase.h"
 
-#include "..\..\View\Figure\FigureViewBase.h"
+#include "../../View/Figure/FigureViewBase.h"
 namespace Model
 {
 FigureBase::FigureBase()

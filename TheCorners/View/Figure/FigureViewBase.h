@@ -1,39 +1,68 @@
 ﻿// ****************************************************************************
 //  FigureViewBase.h
-//  TODO краткое описание класса
+//  Базовое представление фирур
 // ****************************************************************************
 
 #pragma once
-#include "..\BaseView.h"
-#include "..\..\ISubject.h"
+#include "../BaseView.h"
+#include "../../Interfaces/ISubjectView.h"
+
+class IConverterCoordinateFromLocalToGlobal;
+
 namespace View
 {
 class ChessBoardView;
 class FigureViewBase : public BaseView, public ISubjectView
 {
 public:
-
 	FigureViewBase();
 
+	/**
+	 * \brief Инициализатор
+	 */
 	virtual void Init();
 
+	/**
+	 * \brief Смена текстуры на "выбрано"
+	 */
 	void Select();
 
+	/**
+	 * \brief Смена текстуры на "невыбрано"
+	 */
 	void Unselect();
 
-	void MoveTo(sf::Vector2f);
+	/**
+	 * \brief Задать конвертер координат
+	 */
+	void SetConverter(IConverterCoordinateFromLocalToGlobal*);
 
-	sf::Vector2u GetSize() const override;
+	/**
+	 * \brief обнавление анимации
+	 * \param elapsedTime - время кадра
+	 */
+	void Update(float elapsedTime);
 
+	/**
+	 * \brief Получить текущую позицию в координатах игрового поля
+	 * \return 
+	 */
+	[[nodiscard]] BoardCell GetCurrentPosition() const;
+
+	/**
+	 * \brief Вычисление размера шага
+	 */
+	void CalculateStep();
+
+	// Реализация ISubjectView
+	[[nodiscard]] sf::Vector2u GetSize() const override;
+	//-------------------------
+
+	// Реализация ISubjectView
 	void UpdateState() override;
 	void UpdatePosition(BoardCell position) override;
+	//-------------------------
 
-	void SetBoard(ChessBoardView*);
-	sf::Vector2f GetLocalCoordinateToMove(float elapsedTime);
-
-	void SetGlobalCoordinate();
-
-	BoardCell GetCurrentPosition() const;
 
 protected:
 	sf::Texture m_texture;
@@ -42,11 +71,11 @@ protected:
 	BoardCell m_currentPosition;
 	BoardCell m_endPosition;
 	bool m_isSelected;
-	ChessBoardView* m_board;
+	IConverterCoordinateFromLocalToGlobal* m_board;
 
 	float m_localMovedPosition;
 
-	float m_Speed;
+	float m_speed;
 
 	float m_step;
 

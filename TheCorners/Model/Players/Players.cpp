@@ -1,9 +1,9 @@
 ﻿#include "stdafx.h"
 #include "Players.h"
 
-#include "..\Figure\FigureBase.h"
 #include "Player1.h"
 #include "Player2.h"
+#include "../Figure/FigureBase.h"
 
 
 namespace Model
@@ -17,10 +17,9 @@ Players::Players()
 }
 
 Players::~Players()
-{
-}
+= default;
 
-void Players::InitAll()
+void Players::InitAll() const
 {
 	for (auto&& item : m_players)
 	{
@@ -52,11 +51,11 @@ std::vector<std::shared_ptr<PlayerBase>> Players::GetPlayers()
 	return m_players;
 }
 
-void Players::UpdateFigurePosition()
+void Players::UpdateFigurePosition() const
 {
 	for (auto&& player : m_players)
 	{
-		for (const auto& item : player->GetFigure())
+		for (const auto& item : player->GetFigures())
 		{
 			item->NotifyAllNewPosition();
 		}
