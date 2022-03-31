@@ -11,78 +11,79 @@ class IConverterCoordinateFromLocalToGlobal;
 
 namespace View
 {
-class ChessBoardView;
-class FigureViewBase : public BaseView, public ISubjectView
-{
-public:
-	FigureViewBase();
+	class ChessBoardView;
 
-	/**
-	 * \brief Инициализатор
-	 */
-	virtual void Init();
+	class FigureViewBase : public BaseView, public ISubjectView
+	{
+	public:
+		FigureViewBase();
 
-	/**
-	 * \brief Смена текстуры на "выбрано"
-	 */
-	void Select();
+		/**
+		* \brief Инициализатор
+		*/
+		virtual void Init();
 
-	/**
-	 * \brief Смена текстуры на "невыбрано"
-	 */
-	void Unselect();
+		/**
+		* \brief Смена текстуры на "выбрано"
+		*/
+		void Select();
 
-	/**
-	 * \brief Задать конвертер координат
-	 */
-	void SetConverter(IConverterCoordinateFromLocalToGlobal*);
+		/**
+		* \brief Смена текстуры на "невыбрано"
+		*/
+		void Unselect();
 
-	/**
-	 * \brief обнавление анимации
-	 * \param elapsedTime - время кадра
-	 */
-	void Update(float elapsedTime);
+		/**
+		* \brief Задать конвертер координат
+		*/
+		void SetConverter(IConverterCoordinateFromLocalToGlobal*);
 
-	/**
-	 * \brief Получить текущую позицию в координатах игрового поля
-	 * \return 
-	 */
-	[[nodiscard]] BoardCell GetCurrentPosition() const;
+		/**
+		* \brief обнавление анимации
+		* \param elapsedTime - время кадра
+		*/
+		void Update(float elapsedTime);
 
-	/**
-	 * \brief Вычисление размера шага
-	 */
-	void CalculateStep();
+		/**
+		* \brief Получить текущую позицию в координатах игрового поля
+		* \return 
+		*/
+		[[nodiscard]] BoardCell GetCurrentPosition() const;
 
-	// Реализация ISubjectView
-	[[nodiscard]] sf::Vector2u GetSize() const override;
-	//-------------------------
+		/**
+		* \brief Вычисление размера шага
+		*/
+		void CalculateStep();
 
-	// Реализация ISubjectView
-	void UpdateState() override;
-	void UpdatePosition(BoardCell position) override;
-	//-------------------------
+		// Реализация ISubjectView
+		[[nodiscard]] sf::Vector2u GetSize() const override;
+		//-------------------------
+
+		// Реализация ISubjectView
+		void UpdateState() override;
+		void UpdatePosition(BoardCell position) override;
+		//-------------------------
 
 
-protected:
-	sf::Texture m_texture;
-	sf::Texture m_textureSelect;
+	protected:
+		sf::Texture m_texture;
+		sf::Texture m_textureSelect;
 
-	BoardCell m_currentPosition;
-	BoardCell m_endPosition;
-	bool m_isSelected;
-	IConverterCoordinateFromLocalToGlobal* m_board;
+		BoardCell m_currentPosition;
+		BoardCell m_endPosition;
+		bool m_isSelected;
+		IConverterCoordinateFromLocalToGlobal* m_board;
 
-	float m_localMovedPosition;
+		float m_localMovedPosition;
 
-	float m_speed;
+		float m_speed;
 
-	float m_step;
+		float m_step;
 
-	bool m_isMoved;
+		bool m_isMoved;
 
-	sf::Vector2f m_direction;
-	sf::Vector2f m_localCoordinate;
-	sf::Vector2f m_globalCoordinate;
-};
+		sf::Vector2f m_direction;
+		sf::Vector2f m_localCoordinate;
+		sf::Vector2f m_globalCoordinate;
+	};
 }

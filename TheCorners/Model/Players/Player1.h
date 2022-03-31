@@ -5,12 +5,13 @@
 
 #pragma once
 #include "PlayerBase.h"
+
 namespace Model
 {
-class Player1 final : public PlayerBase
-{
-public:
-	~Player1() override;
-	void Init() override;
-};
+	class Player1 final : public PlayerBase
+	{
+	public:
+		~Player1() override;
+		void Init() override;
+	};
 }

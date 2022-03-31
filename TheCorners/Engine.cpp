@@ -27,8 +27,8 @@ void Engine::Init()
 	resolution.y = sf::VideoMode::getDesktopMode().height;
 
 	m_Window.create(sf::VideoMode(resolution.x, resolution.y),
-	                "Simple Game Engine",
-	                sf::Style::Fullscreen);
+					"Simple Game Engine",
+					sf::Style::Fullscreen);
 
 	m_players.InitAll();
 
@@ -75,6 +75,20 @@ void Engine::Init()
 			m_chessBoard.ChangeOccupiedCell(item->GetCurrentCell(), item->GetCurrentCell());
 		}
 	}
+
+	// Вчисляем начальные выбранные фигуры  
+	for (const auto& player : m_players.GetPlayers())
+	{
+		for (auto element : player->GetFigures())
+		{
+			if (m_chessBoard.ThereAreMoves(element->GetCurrentCell()) == true)
+			{
+				player->SetSelectFigure(element);
+				break;
+			}
+		}
+	}
+	m_players.GetActivePlayer()->UpdateSelectFigure();
 }
 
 Engine::~Engine()
@@ -114,13 +128,13 @@ void Engine::Events()
 	{
 		switch (event.type)
 		{
-			case sf::Event::Resized:
-				{
-					sf::IntRect visibleAria(0, 0, event.size.width, event.size.height);
-					m_Window.setView(sf::View(static_cast<sf::FloatRect>(visibleAria)));
-					break;
-				}
-			default: break;
+		case sf::Event::Resized :
+			{
+				sf::IntRect visibleAria(0, 0, event.size.width, event.size.height);
+				m_Window.setView(sf::View(static_cast<sf::FloatRect>(visibleAria)));
+				break;
+			}
+		default : break;
 		}
 	}
 }
@@ -218,7 +232,6 @@ void Engine::Update(float dtAsSeconds)
 	}
 }
 
-
 /**
  * \brief  Мметод перерисовки всех объектов
  */
@@ -246,7 +259,6 @@ void Engine::Draw()
 	// Отображаем все, что нарисовали
 	m_Window.display();
 }
-
 
 /**
  * \brief Метод определяющий была нажата клавиша один раз

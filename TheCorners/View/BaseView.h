@@ -6,34 +6,34 @@
 #pragma once
 namespace View
 {
-class BaseView
-{
-public:
-	BaseView();
+	class BaseView
+	{
+	public:
+		BaseView();
 
-	virtual ~BaseView() = default;
+		virtual ~BaseView() = default;
 
-	/**
-	 * \brief Получение размеров исходного представления без изменения масштаба
-	 * \return Ветор с размерами
-	 */
-	virtual sf::Vector2u GetSize() const = 0;
+		/**
+		* \brief Получение размеров исходного представления без изменения масштаба
+		* \return Ветор с размерами
+		*/
+		virtual sf::Vector2u GetSize() const = 0;
 
-	/**
-	 * \brief Задать маштаб всем представлениям
-	 * \param scale - масштаб
-	 */
-	void SetScale(float scale);
+		/**
+		* \brief Задать маштаб всем представлениям
+		* \param scale - масштаб
+		*/
+		void SetScale(float scale);
 
-	/**
-	 * \brief 
-	 * \return 
-	 */
-	sf::Sprite GetSprite();
+		/**
+		* \brief 
+		* \return 
+		*/
+		sf::Sprite GetSprite();
 
-protected:
-	float m_scale; // Объявляем масштаб
+	protected:
+		float m_scale; // Объявляем масштаб
 
-	sf::Sprite m_Sprite{}; // Объявляем объект Sprite
-};
+		sf::Sprite m_Sprite{}; // Объявляем объект Sprite
+	};
 }

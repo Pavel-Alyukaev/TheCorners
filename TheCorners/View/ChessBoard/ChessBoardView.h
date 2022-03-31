@@ -9,34 +9,34 @@
 
 namespace View
 {
-class ChessBoardView final : public BaseView, public IConverterCoordinateFromLocalToGlobal
-{
-public:
-	ChessBoardView();
+	class ChessBoardView final : public BaseView, public IConverterCoordinateFromLocalToGlobal
+	{
+	public:
+		ChessBoardView();
 
-	/**
-	 * \brief Инициализация объекта
-	 */
-	void Init();
+		/**
+		* \brief Инициализация объекта
+		*/
+		void Init();
 
-	/**
-	 * \brief Задать и обновить глобальную позицию представления
-	 * \param windowResolution 
-	 */
-	void CalculateAndSetGlobalPosition(sf::Vector2u windowResolution);
+		/**
+		* \brief Задать и обновить глобальную позицию представления
+		* \param windowResolution 
+		*/
+		void CalculateAndSetGlobalPosition(sf::Vector2u windowResolution);
 
-	// Реализация BaseView
-	[[nodiscard]] sf::Vector2u GetSize() const override;
+		// Реализация BaseView
+		[[nodiscard]] sf::Vector2u GetSize() const override;
 
-	// Реализация IConverterCoordinateFromLocalToGlobal
-	[[nodiscard]] sf::Vector2f ConvertCageNumberToGlobalCoordinate(BoardCell currentCell) const override;
+		// Реализация IConverterCoordinateFromLocalToGlobal
+		[[nodiscard]] sf::Vector2f ConvertCageNumberToGlobalCoordinate(BoardCell currentCell) const override;
 
-private:
-	sf::Texture m_boardTexture;
-	sf::Vector2f m_globalPosition;
+	private:
+		sf::Texture m_boardTexture;
+		sf::Vector2f m_globalPosition;
 
-	sf::Vector2f m_firstCellLocalPosition;
+		sf::Vector2f m_firstCellLocalPosition;
 
-	int m_cellSize;
-};
+		int m_cellSize;
+	};
 }
