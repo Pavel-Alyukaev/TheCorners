@@ -23,6 +23,8 @@ namespace Model
 		[[nodiscard]] BoardCell GetCellOnTheLeft(BoardCell currentCell) const;
 		[[nodiscard]] BoardCell GetCellFromTheBottom(BoardCell currentCell) const;
 
+		void Deinit();
+
 	private:
 		bool CheckBorder(BoardCell currentCell) const;
 

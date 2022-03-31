@@ -62,6 +62,8 @@ namespace Model
 		*/
 		std::vector<std::shared_ptr<FigureBase>> GetFigures();
 
+		virtual void Restart() = 0;
+
 	protected:
 		std::vector<std::shared_ptr<FigureBase>> m_figures;
 

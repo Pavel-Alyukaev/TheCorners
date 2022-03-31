@@ -63,4 +63,15 @@ namespace Model
 			}
 		}
 	}
+
+	void Players::Restart()
+	{
+		m_activePlayer.reset();
+		for (auto player : m_players)
+		{
+			player->Restart();
+			player->SetSelectFigure(player->GetFigures().front());
+		}
+		m_activePlayer = m_players.front();
+	}
 }

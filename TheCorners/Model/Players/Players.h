@@ -41,6 +41,8 @@ namespace Model
 		*/
 		void UpdateFigurePosition() const;
 
+		void Restart();
+
 	private:
 		std::vector<std::shared_ptr<PlayerBase>> m_players;
 		std::shared_ptr<PlayerBase> m_activePlayer;

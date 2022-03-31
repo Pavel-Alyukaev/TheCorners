@@ -35,7 +35,7 @@ namespace Model
 
 		void NotifyAllState() override;
 		void NotifyAllNewPosition() override;
-
+	
 	protected:
 		BoardCell m_currentCell;
 

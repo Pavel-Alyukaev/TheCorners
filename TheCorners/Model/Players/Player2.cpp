@@ -24,4 +24,16 @@ namespace Model
 		}
 		m_selectFigure = m_figures.front();
 	}
+
+	void Player2::Restart()
+	{
+		int k = 0;
+		for (int i = 1; i < 4; ++i)
+		{
+			for (int r = 8; r >= 6; --r)
+			{
+				m_figures[k++]->SetCurrentCell({i, r});
+			}
+		}
+	}
 }

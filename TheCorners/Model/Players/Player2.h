@@ -13,5 +13,6 @@ namespace Model
 	public:
 		~Player2() override;
 		void Init() override;
+		void Restart() override;
 	};
 }

@@ -67,7 +67,7 @@ void Engine::Init()
 
 	m_players.UpdateFigurePosition();
 
-	// Вчисляем какие клетки заняты
+	// Вычисляем какие клетки заняты
 	for (const auto& player : m_players.GetPlayers())
 	{
 		for (const auto& item : player->GetFigures())
@@ -139,6 +139,28 @@ void Engine::Events()
 	}
 }
 
+void Engine::ChangeSelection(const std::shared_ptr<Model::PlayerBase> player)
+{
+	auto figures = player->GetFigures();
+	auto selectFigure = player->GetSelectFigure();
+
+	auto iterator = std::find_if(figures.begin(), figures.end(), [&](const auto& item)
+	{
+		return item->GetCurrentCell() == selectFigure->GetCurrentCell();
+	});
+
+	do
+	{
+		if (++iterator == figures.end())
+		{
+			iterator = figures.begin();
+		}
+	}
+	while (m_chessBoard.ThereAreMoves((*iterator)->GetCurrentCell()) == false);
+
+	player->SetSelectFigure(*iterator);
+}
+
 /**
  * \brief Метод обработки input-a
  */
@@ -194,27 +216,31 @@ void Engine::Input()
 	}
 	else if (KeyPress(sf::Keyboard::Up))
 	{
-		auto figures = m_players.GetActivePlayer()->GetFigures();
-		auto selectFigure = m_players.GetActivePlayer()->GetSelectFigure();
+		ChangeSelection(m_players.GetActivePlayer());
+	}
+	else if (KeyPress(sf::Keyboard::R))
+	{
+		m_players.Restart();
+		m_chessBoard.Deinit();
 
-		auto iterator = std::find_if(figures.begin(), figures.end(), [&](const auto& item)
+		// Вычисляем какие клетки заняты
+		for (const auto& player : m_players.GetPlayers())
 		{
-			return item->GetCurrentCell() == selectFigure->GetCurrentCell();
-		});
-
-		do
-		{
-			if (++iterator == figures.end())
+			for (const auto& item : player->GetFigures())
 			{
-				iterator = figures.begin();
+				m_chessBoard.ChangeOccupiedCell(item->GetCurrentCell(), item->GetCurrentCell());
 			}
-		}
-		while (m_chessBoard.ThereAreMoves((*iterator)->GetCurrentCell()) == false);
 
-		m_players.GetActivePlayer()->SetSelectFigure(*iterator);
+			ChangeSelection(player);
+		}
+		m_players.GetActivePlayer()->UpdateSelectFigure();
 	}
 }
 
+void Engine::Restart()
+{
+	m_players.Restart();
+}
 
 /**
  * \brief Мметод обновления положения всех объектов

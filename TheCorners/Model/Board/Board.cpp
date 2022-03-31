@@ -31,6 +31,11 @@ namespace Model
 		return currentCell;
 	}
 
+	void Board::Deinit()
+	{
+		m_occupiedCells.clear();
+	}
+
 	bool Board::CheckBorder(BoardCell currentCell) const
 	{
 		return currentCell.Col > 0 && currentCell.Col < 9 && currentCell.Row > 0 && currentCell.Row < 9;

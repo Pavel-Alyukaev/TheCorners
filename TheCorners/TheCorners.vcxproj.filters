@@ -29,6 +29,9 @@
     <Filter Include="Исходные файлы\Interfaces">
       <UniqueIdentifier>{dd5c8d33-3f44-4ec4-a659-9646994f9048}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Model\Goals">
+      <UniqueIdentifier>{90afad4b-d9fe-4682-86ff-71540becc840}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
