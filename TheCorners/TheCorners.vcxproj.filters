@@ -5,6 +5,14 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
     <Filter Include="Исходные файлы\Model">
       <UniqueIdentifier>{e0facf6d-364e-4690-867b-4ee43f21d16d}</UniqueIdentifier>
     </Filter>
@@ -25,12 +33,6 @@
     </Filter>
     <Filter Include="Исходные файлы\View\Figure">
       <UniqueIdentifier>{1f3bc280-bf93-4959-832a-cd5510bbc4ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\Interfaces">
-      <UniqueIdentifier>{dd5c8d33-3f44-4ec4-a659-9646994f9048}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\Model\Goals">
-      <UniqueIdentifier>{90afad4b-d9fe-4682-86ff-71540becc840}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +83,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IMoveFigure.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameEntity.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
     <ClInclude Include="View\ChessBoard\ChessBoardView.h">
       <Filter>Исходные файлы\View\ChessBoard</Filter>
     </ClInclude>
@@ -118,25 +132,28 @@
       <Filter>Исходные файлы\Model\Figure</Filter>
     </ClInclude>
     <ClInclude Include="IConverterCoordinateFromLocalToGlobal.h">
-      <Filter>Исходные файлы\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameEntity.h">
-      <Filter>Исходные файлы\Interfaces</Filter>
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="IListener.h">
-      <Filter>Исходные файлы\Interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="IMoveFigure.h">
-      <Filter>Исходные файлы\Interfaces</Filter>
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ISubjectView.h">
-      <Filter>Исходные файлы\Interfaces</Filter>
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Исходные файлы</Filter>
+    <ClInclude Include="Interfaces\IConverterCoordinateFromLocalToGlobal.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Исходные файлы</Filter>
+    <ClInclude Include="Interfaces\IGameEntity.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IListener.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IMoveFigure.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\ISubjectView.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

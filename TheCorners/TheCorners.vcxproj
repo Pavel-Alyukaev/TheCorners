@@ -173,6 +173,11 @@
     <ClInclude Include="IListener.h" />
     <ClInclude Include="IMoveFigure.h" />
     <ClInclude Include="IGameEntity.h" />
+    <ClInclude Include="Interfaces\IConverterCoordinateFromLocalToGlobal.h" />
+    <ClInclude Include="Interfaces\IGameEntity.h" />
+    <ClInclude Include="Interfaces\IListener.h" />
+    <ClInclude Include="Interfaces\IMoveFigure.h" />
+    <ClInclude Include="Interfaces\ISubjectView.h" />
     <ClInclude Include="ISubjectView.h" />
     <ClInclude Include="Model\Board\Board.h" />
     <ClInclude Include="Model\Figure\FigureBase.h" />
