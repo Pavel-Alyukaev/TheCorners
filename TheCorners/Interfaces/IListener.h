@@ -14,6 +14,7 @@ public:
 	virtual void DeleteListener(ISubjectView*) = 0;
 
 private:
+	virtual void NotifyAll() = 0;
 	virtual void NotifyAllState() = 0;
 	virtual void NotifyAllNewPosition() = 0;
 };

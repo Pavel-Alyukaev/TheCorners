@@ -7,6 +7,7 @@
 #include "Model/Players/Players.h"
 #include "View/ChessBoard/ChessBoardView.h"
 #include "View/Figure/FiguresView.h"
+#include "View/FinishWindow/FinishWindows.h"
 
 class Engine
 {
@@ -24,8 +25,11 @@ private:
 	void Restart();
 	void Events();
 	void ChangeSelection(std::shared_ptr<Model::PlayerBase>);
+	void RestartGame();
 	void Update(float dtAsSeconds);
 	void Draw();
+
+	void MovingFigureByPlayer(BoardCell newCell);
 
 	bool KeyPress(sf::Keyboard::Key key);
 
@@ -34,15 +38,11 @@ private:
 
 	View::ChessBoardView m_chessBoardView;
 	View::FiguresView m_figuresView;
+	View::FinishWindows m_finishWindows;
+
 	
 	Model::Board m_chessBoard;
 	Model::Players m_players;
-
-	// Объявляем спрайт и текстуру для фона
-	sf::Sprite m_BackgroundSprite;
-	sf::Texture m_BackgroundTexture;
-
-	sf::Sprite m_Sprite;
 
 	std::pair<sf::Keyboard::Key, bool> m_isFirstPress;
 };

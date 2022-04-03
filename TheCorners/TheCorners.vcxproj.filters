@@ -81,18 +81,33 @@
     <ClCompile Include="Model\Figure\FigureBase.cpp">
       <Filter>Исходные файлы\Model\Figure</Filter>
     </ClCompile>
+    <ClCompile Include="View\FinishWindow\FailedWindow.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="View\FinishWindow\SuccessWindow.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="View\FinishWindow\BaseWindow.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="View\FinishWindow\FinishWindows.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Goals\GoalBaseGameCorners.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Goals\GoalPlayer1.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Model\Goals\GoalPlayer2.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IMoveFigure.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameEntity.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="View\ChessBoard\ChessBoardView.h">
@@ -131,15 +146,6 @@
     <ClInclude Include="Model\Figure\FigureBase.h">
       <Filter>Исходные файлы\Model\Figure</Filter>
     </ClInclude>
-    <ClInclude Include="IConverterCoordinateFromLocalToGlobal.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IListener.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ISubjectView.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Interfaces\IConverterCoordinateFromLocalToGlobal.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -153,6 +159,33 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Interfaces\ISubjectView.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="View\FinishWindow\FailedWindow.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IFinishWindow.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="View\FinishWindow\SuccessWindow.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="View\FinishWindow\BaseWindow.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="View\FinishWindow\FinishWindows.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Interfaces\IGoalsBase.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Goals\GoalBaseGameCorners.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Goals\GoalPlayer1.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Model\Goals\GoalPlayer2.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

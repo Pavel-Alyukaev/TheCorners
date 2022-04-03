@@ -25,13 +25,13 @@ namespace View
 
 	void ChessBoardView::CalculateAndSetGlobalPosition(sf::Vector2u windowResolution)
 	{
-		m_globalPosition = (static_cast<sf::Vector2f>(windowResolution) - static_cast<sf::Vector2f>(m_boardTexture.
-			getSize()) * m_scale) / 2.0f;
+		m_globalPosition = (static_cast<sf::Vector2f>(windowResolution) - 
+			static_cast<sf::Vector2f>(m_boardTexture.getSize()) * m_scale) / 2.0f;
 
 		m_Sprite.setPosition(m_globalPosition);
 	}
 
-	sf::Vector2f ChessBoardView::ConvertCageNumberToGlobalCoordinate(BoardCell currentCell) const
+	sf::Vector2f ChessBoardView::ConvertCellNumberToGlobalCoordinate(BoardCell currentCell) const
 	{
 		sf::Vector2f result = m_globalPosition;
 

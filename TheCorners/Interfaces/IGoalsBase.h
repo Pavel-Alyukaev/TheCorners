@@ -1,17 +1,19 @@
 ﻿// ****************************************************************************
-//  IGameEntity.h
+//  GoalsBase.h
 //  TODO краткое описание класса
 // ****************************************************************************
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-class IGameEntity
+namespace Model
+{
+class FigureBase;
+}
+class IGoalsBase
 {
 public:
-	virtual ~IGameEntity() = default;
-	virtual sf::Vector2i GetCurrentPosition() = 0;
+	virtual ~IGoalsBase() = default;
+	virtual	void Init() = 0;
+	virtual bool Check(std::vector<std::shared_ptr<Model::FigureBase>>& figures) = 0;
 
-	virtual void SetCurrentPosition(sf::Vector2i) = 0;
 };

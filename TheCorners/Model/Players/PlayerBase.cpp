@@ -5,29 +5,11 @@
 
 namespace Model
 {
-	PlayerBase::PlayerBase()
+class GoalBaseGameCorners;
+
+PlayerBase::PlayerBase()
 	{
 		m_figures.reserve(9);
-	}
-
-	void PlayerBase::MovingForward()
-	{
-		m_selectFigure->MovingForward();
-	}
-
-	void PlayerBase::MovingLeft()
-	{
-		m_selectFigure->MovingLeft();
-	}
-
-	void PlayerBase::MovingRight()
-	{
-		m_selectFigure->MovingRight();
-	}
-
-	void PlayerBase::MovingBackward()
-	{
-		m_selectFigure->MovingBackward();
 	}
 
 	void PlayerBase::SetSelectFigure(std::shared_ptr<FigureBase> figure)
@@ -51,5 +33,10 @@ namespace Model
 	std::vector<std::shared_ptr<FigureBase>> PlayerBase::GetFigures()
 	{
 		return m_figures;
+	}
+
+	std::shared_ptr<GoalBaseGameCorners> PlayerBase::GetGoal() const
+	{
+		return m_goal;
 	}
 }

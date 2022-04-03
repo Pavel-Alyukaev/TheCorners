@@ -17,7 +17,7 @@ namespace View
 		/**
 		* \brief Инициализация объекта
 		*/
-		void Init();
+		void Init() override;
 
 		/**
 		* \brief Задать и обновить глобальную позицию представления
@@ -29,7 +29,7 @@ namespace View
 		[[nodiscard]] sf::Vector2u GetSize() const override;
 
 		// Реализация IConverterCoordinateFromLocalToGlobal
-		[[nodiscard]] sf::Vector2f ConvertCageNumberToGlobalCoordinate(BoardCell currentCell) const override;
+		[[nodiscard]] sf::Vector2f ConvertCellNumberToGlobalCoordinate(BoardCell currentCell) const override;
 
 	private:
 		sf::Texture m_boardTexture;

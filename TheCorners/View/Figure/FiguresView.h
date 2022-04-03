@@ -15,6 +15,7 @@ namespace View
 	{
 	public:
 		FiguresView();
+
 		void Init();
 
 		/**
@@ -26,6 +27,7 @@ namespace View
 		// Реализация ISubjectView
 		void UpdateState() override;
 		void UpdatePosition(BoardCell position) override;
+		void UpdateFinishWindow(bool isSuccess) override;
 		//------------------------
 
 	private:

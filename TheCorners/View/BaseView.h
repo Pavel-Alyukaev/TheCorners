@@ -13,6 +13,8 @@ namespace View
 
 		virtual ~BaseView() = default;
 
+		virtual void Init() = 0;
+
 		/**
 		* \brief Получение размеров исходного представления без изменения масштаба
 		* \return Ветор с размерами

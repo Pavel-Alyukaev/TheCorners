@@ -30,12 +30,13 @@ namespace Model
 		void AddListener(ISubjectView*) override;
 		void DeleteListener(ISubjectView*) override;
 
-		BoardCell GetCurrentCell() const;
+		[[nodiscard]] BoardCell GetCurrentCell() const;
 		void SetCurrentCell(BoardCell);
 
 		void NotifyAllState() override;
 		void NotifyAllNewPosition() override;
-	
+	private:
+		void NotifyAll() override{};
 	protected:
 		BoardCell m_currentCell;
 

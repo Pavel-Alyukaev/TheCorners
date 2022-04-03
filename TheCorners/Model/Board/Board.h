@@ -11,10 +11,10 @@ namespace Model
 	{
 	public:
 		void Update();
-		bool CanMoveToCell(BoardCell currentCell) const;
+		[[nodiscard]] bool CanMoveToCell(BoardCell currentCell) const;
 
 
-		bool ThereAreMoves(BoardCell currentCell) const;
+		 bool ThereAreMoves(BoardCell currentCell) const;
 
 		void ChangeOccupiedCell(BoardCell oldCell, BoardCell newCell);
 

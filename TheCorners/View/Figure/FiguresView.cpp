@@ -46,4 +46,8 @@ namespace View
 	void FiguresView::UpdatePosition(BoardCell position)
 	{
 	}
+
+	void FiguresView::UpdateFinishWindow(bool isSuccess)
+	{
+	}
 }

@@ -19,11 +19,6 @@ namespace View
 		FigureViewBase();
 
 		/**
-		* \brief Инициализатор
-		*/
-		virtual void Init();
-
-		/**
 		* \brief Смена текстуры на "выбрано"
 		*/
 		void Select();
@@ -62,6 +57,7 @@ namespace View
 		// Реализация ISubjectView
 		void UpdateState() override;
 		void UpdatePosition(BoardCell position) override;
+		void UpdateFinishWindow(bool isSuccess) override {}
 		//-------------------------
 
 

@@ -1,17 +1,19 @@
 ﻿// ****************************************************************************
-//  IGameEntity.h
+//  SuccessWindow.h
 //  TODO краткое описание класса
 // ****************************************************************************
 
 #pragma once
+#include "BaseWindow.h"
 
-#include <SFML/Graphics.hpp>
-
-class IGameEntity
+namespace View
 {
-public:
-	virtual ~IGameEntity() = default;
-	virtual sf::Vector2i GetCurrentPosition() = 0;
 
-	virtual void SetCurrentPosition(sf::Vector2i) = 0;
-};
+	class SuccessWindow final : public BaseWindow
+	{
+	public:
+
+		void Init() override;
+		void UpdateFinishWindow(bool isSuccess) override;
+	};
+}

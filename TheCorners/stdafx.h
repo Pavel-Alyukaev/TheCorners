@@ -20,6 +20,11 @@ struct BoardCell
 	{
 	}
 
+	BoardCell(const BoardCell& right) : Col(right.Col), Row(right.Row)
+	{
+	}
+
+
 	bool operator ==(const BoardCell& right)
 	{
 		return Row == right.Row && Col == right.Col;
@@ -39,4 +44,6 @@ struct BoardCell
 	{
 		return BoardCell({Col + right.Col, Row + right.Row});
 	}
+
 };
+

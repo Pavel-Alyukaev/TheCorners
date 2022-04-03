@@ -2,6 +2,7 @@
 #include "Engine.h"
 
 #include "Model/Figure/FigureBase.h"
+#include "Model/Goals/GoalBaseGameCorners.h"
 #include "Model/Players/PlayerBase.h"
 #include "View/Figure/FigureView1.h"
 #include "View/Figure/FigureView2.h"
@@ -24,8 +25,8 @@ void Engine::Init()
 	// Получаем разрешение экрана, создаем окно SFML и View
 	sf::Vector2u resolution;
 	resolution.x = sf::VideoMode::getDesktopMode().width;
-	resolution.y = sf::VideoMode::getDesktopMode().height;
 
+	resolution.y = sf::VideoMode::getDesktopMode().height;
 	m_Window.create(sf::VideoMode(resolution.x, resolution.y),
 					"Simple Game Engine",
 					sf::Style::Fullscreen);
@@ -40,6 +41,11 @@ void Engine::Init()
 	m_chessBoardView.SetScale(scale);
 	m_chessBoardView.CalculateAndSetGlobalPosition(resolution);
 
+	// Инициализируем финишные окна
+	m_finishWindows.InitAll();
+	m_finishWindows.SetScale(scale);
+	m_finishWindows.SetResolution(resolution);
+
 	// Инициализируем графику фигур
 	m_figuresView.Init();
 	for (const auto& element : m_figuresView.GetPlayerFiguresView())
@@ -52,7 +58,7 @@ void Engine::Init()
 		}
 	}
 
-	// Подписываемся нак события изменения селекта
+	// Подписываемся на события изменения селекта
 	for (int i = 0; i < 2; ++i)
 	{
 		auto figureView = m_figuresView.GetPlayerFiguresView()[i];
@@ -65,6 +71,11 @@ void Engine::Init()
 		}
 	}
 
+	m_players.GetPlayers()[0]->GetGoal()->AddListener(m_finishWindows.GetWindow(View::ResultWindow::Success));
+	m_players.GetPlayers()[0]->GetGoal()->AddListener(m_finishWindows.GetWindow(View::ResultWindow::Failure));
+	m_players.GetPlayers()[1]->GetGoal()->AddListener(m_finishWindows.GetWindow(View::ResultWindow::Success));
+	m_players.GetPlayers()[1]->GetGoal()->AddListener(m_finishWindows.GetWindow(View::ResultWindow::Failure));
+
 	m_players.UpdateFigurePosition();
 
 	// Вычисляем какие клетки заняты
@@ -76,7 +87,7 @@ void Engine::Init()
 		}
 	}
 
-	// Вчисляем начальные выбранные фигуры  
+	// Вычисляем начальные выбранные фигуры  
 	for (const auto& player : m_players.GetPlayers())
 	{
 		for (auto element : player->GetFigures())
@@ -92,8 +103,7 @@ void Engine::Init()
 }
 
 Engine::~Engine()
-{
-}
+= default;
 
 /**
  * \brief Запуск симуляции
@@ -142,7 +152,7 @@ void Engine::Events()
 void Engine::ChangeSelection(const std::shared_ptr<Model::PlayerBase> player)
 {
 	auto figures = player->GetFigures();
-	auto selectFigure = player->GetSelectFigure();
+	const auto selectFigure = player->GetSelectFigure();
 
 	auto iterator = std::find_if(figures.begin(), figures.end(), [&](const auto& item)
 	{
@@ -161,6 +171,38 @@ void Engine::ChangeSelection(const std::shared_ptr<Model::PlayerBase> player)
 	player->SetSelectFigure(*iterator);
 }
 
+void Engine::RestartGame()
+{
+	m_players.Restart();
+	m_chessBoard.Deinit();
+
+	// Вычисляем какие клетки заняты
+	for (const auto& player : m_players.GetPlayers())
+	{
+		for (const auto& item : player->GetFigures())
+		{
+			m_chessBoard.ChangeOccupiedCell(item->GetCurrentCell(), item->GetCurrentCell());
+		}
+
+		ChangeSelection(player);
+	}
+	m_players.GetActivePlayer()->UpdateSelectFigure();
+}
+
+void Engine::MovingFigureByPlayer(const BoardCell newCell)
+{
+	const auto activeFigure = m_players.GetActivePlayer()->GetSelectFigure();
+	auto figures = m_players.GetActivePlayer()->GetFigures();
+
+	if (m_chessBoard.CanMoveToCell(newCell))
+	{
+		m_chessBoard.ChangeOccupiedCell(activeFigure->GetCurrentCell(), newCell);
+		activeFigure->SetCurrentCell(newCell);
+		m_players.GetActivePlayer()->GetGoal()->Check(figures);
+		m_players.ChangeActivePlayer();
+	}
+}
+
 /**
  * \brief Метод обработки input-a
  */
@@ -168,51 +210,40 @@ void Engine::Input()
 {
 	if (KeyPress(sf::Keyboard::Escape))
 	{
-		m_Window.close();
+		auto window = m_finishWindows.GetActiveWindow();
+		if(window !=nullptr)
+		{
+			window->Hide();
+			RestartGame();
+		}
+		else
+		{
+			m_Window.close();
+		}
 	}
 	else if (KeyPress(sf::Keyboard::W))
 	{
 		const auto activeFigure = m_players.GetActivePlayer()->GetSelectFigure();
 		const auto newCell = m_chessBoard.GetCellFromTheTop(activeFigure->GetCurrentCell());
-		if (m_chessBoard.CanMoveToCell(newCell))
-		{
-			m_chessBoard.ChangeOccupiedCell(activeFigure->GetCurrentCell(), newCell);
-			activeFigure->SetCurrentCell(newCell);
-			m_players.ChangeActivePlayer();
-		}
+		MovingFigureByPlayer(newCell);
 	}
 	else if (KeyPress(sf::Keyboard::D))
 	{
 		const auto activeFigure = m_players.GetActivePlayer()->GetSelectFigure();
 		const auto newCell = m_chessBoard.GetCellOnTheRight(activeFigure->GetCurrentCell());
-		if (m_chessBoard.CanMoveToCell(newCell))
-		{
-			m_chessBoard.ChangeOccupiedCell(activeFigure->GetCurrentCell(), newCell);
-			activeFigure->SetCurrentCell(newCell);
-			m_players.ChangeActivePlayer();
-		}
+		MovingFigureByPlayer(newCell);
 	}
 	else if (KeyPress(sf::Keyboard::S))
 	{
 		const auto activeFigure = m_players.GetActivePlayer()->GetSelectFigure();
 		const auto newCell = m_chessBoard.GetCellFromTheBottom(activeFigure->GetCurrentCell());
-		if (m_chessBoard.CanMoveToCell(newCell))
-		{
-			m_chessBoard.ChangeOccupiedCell(activeFigure->GetCurrentCell(), newCell);
-			activeFigure->SetCurrentCell(newCell);
-			m_players.ChangeActivePlayer();
-		}
+		MovingFigureByPlayer(newCell);
 	}
 	else if (KeyPress(sf::Keyboard::A))
 	{
 		const auto activeFigure = m_players.GetActivePlayer()->GetSelectFigure();
 		const auto newCell = m_chessBoard.GetCellOnTheLeft(activeFigure->GetCurrentCell());
-		if (m_chessBoard.CanMoveToCell(newCell))
-		{
-			m_chessBoard.ChangeOccupiedCell(activeFigure->GetCurrentCell(), newCell);
-			activeFigure->SetCurrentCell(newCell);
-			m_players.ChangeActivePlayer();
-		}
+		MovingFigureByPlayer(newCell);
 	}
 	else if (KeyPress(sf::Keyboard::Up))
 	{
@@ -220,20 +251,17 @@ void Engine::Input()
 	}
 	else if (KeyPress(sf::Keyboard::R))
 	{
-		m_players.Restart();
-		m_chessBoard.Deinit();
-
-		// Вычисляем какие клетки заняты
-		for (const auto& player : m_players.GetPlayers())
-		{
-			for (const auto& item : player->GetFigures())
-			{
-				m_chessBoard.ChangeOccupiedCell(item->GetCurrentCell(), item->GetCurrentCell());
-			}
-
-			ChangeSelection(player);
-		}
-		m_players.GetActivePlayer()->UpdateSelectFigure();
+		RestartGame();
+	}
+	else if (KeyPress(sf::Keyboard::F))
+	{
+		m_finishWindows.GetWindow(View::ResultWindow::Success)->Hide();
+		m_finishWindows.GetWindow(View::ResultWindow::Failure)->Show();
+	}
+	else if (KeyPress(sf::Keyboard::G))
+	{
+		m_finishWindows.GetWindow(View::ResultWindow::Failure)->Hide();
+		m_finishWindows.GetWindow(View::ResultWindow::Success)->Show();
 	}
 }
 
@@ -248,13 +276,17 @@ void Engine::Restart()
  */
 void Engine::Update(float dtAsSeconds)
 {
-	sf::Vector2f local;
 	for (const auto& element : m_figuresView.GetPlayerFiguresView())
 	{
 		for (auto item : element)
 		{
 			item->Update(dtAsSeconds);
 		}
+	}
+
+	if (m_finishWindows.GetActiveWindow() != nullptr)
+	{
+		m_finishWindows.GetActiveWindow()->Update(dtAsSeconds);
 	}
 }
 
@@ -266,10 +298,6 @@ void Engine::Draw()
 	// Стираем предыдущий кадр
 	m_Window.clear(sf::Color::White);
 
-	// Отрисовываем фон
-	m_Window.draw(m_BackgroundSprite);
-	m_Window.draw(m_Sprite);
-
 	// Отрисовываем доску
 	m_Window.draw(m_chessBoardView.GetSprite());
 
@@ -280,6 +308,11 @@ void Engine::Draw()
 		{
 			m_Window.draw(item->GetSprite());
 		}
+	}
+
+	if(m_finishWindows.GetActiveWindow() != nullptr)
+	{
+		m_Window.draw(m_finishWindows.GetActiveWindow()->GetSprite());
 	}
 
 	// Отображаем все, что нарисовали

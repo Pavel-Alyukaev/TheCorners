@@ -1,17 +1,20 @@
 ﻿// ****************************************************************************
-//  IGameEntity.h
+//  IFinishWindow.h
 //  TODO краткое описание класса
 // ****************************************************************************
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
-class IGameEntity
+class IFinishWindow
 {
 public:
-	virtual ~IGameEntity() = default;
-	virtual sf::Vector2i GetCurrentPosition() = 0;
+	virtual ~IFinishWindow() = default;
 
-	virtual void SetCurrentPosition(sf::Vector2i) = 0;
+	virtual void Show() = 0;
+
+	virtual void Hide() = 0;
+
+	virtual bool IsVisible() = 0;
+
+	
 };

@@ -2,6 +2,7 @@
 #include "Player1.h"
 
 #include "../Figure/FigureBase.h"
+#include "../Goals/GoalPlayer1.h"
 
 namespace Model
 {
@@ -22,6 +23,10 @@ namespace Model
 			}
 		}
 		m_selectFigure = m_figures.front();
+
+		m_goal = std::make_shared<GoalPlayer1>();
+		m_goal->Init();
+
 	}
 
 	void Player1::Restart()

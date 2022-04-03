@@ -9,10 +9,6 @@ namespace View
 	{
 	}
 
-	void FigureViewBase::Init()
-	{
-	}
-
 	void FigureViewBase::Select()
 	{
 		if (m_isSelected == false)
@@ -47,14 +43,14 @@ namespace View
 		{
 			m_currentPosition = position;
 			m_endPosition = position;
-			m_globalCoordinate = m_board->ConvertCageNumberToGlobalCoordinate(m_currentPosition);
+			m_globalCoordinate = m_board->ConvertCellNumberToGlobalCoordinate(m_currentPosition);
 			m_Sprite.setPosition(m_globalCoordinate);
 		}
 		else
 		{
 			m_isMoved = true;
 			m_endPosition = position;
-			auto direction = m_endPosition - m_currentPosition;
+			const auto direction = m_endPosition - m_currentPosition;
 			m_direction.x = static_cast<float>(direction.Col);
 			m_direction.y = -static_cast<float>(direction.Row);
 		}
@@ -82,7 +78,7 @@ namespace View
 			m_localCoordinate = {0.0f, 0.0f};
 			m_isMoved = false;
 			m_currentPosition = m_endPosition;
-			m_globalCoordinate = m_board->ConvertCageNumberToGlobalCoordinate(m_currentPosition);
+			m_globalCoordinate = m_board->ConvertCellNumberToGlobalCoordinate(m_currentPosition);
 
 			// Теперь сдвигаем спрайт на новую позицию
 			m_Sprite.setPosition(m_globalCoordinate);
@@ -100,9 +96,9 @@ namespace View
 
 	void FigureViewBase::CalculateStep()
 	{
-		const auto globalCoordinate1 = m_board->ConvertCageNumberToGlobalCoordinate({1, 1});
+		const auto globalCoordinate1 = m_board->ConvertCellNumberToGlobalCoordinate({1, 1});
 
-		const auto globalCoordinate2 = m_board->ConvertCageNumberToGlobalCoordinate({1, 2});
+		const auto globalCoordinate2 = m_board->ConvertCellNumberToGlobalCoordinate({1, 2});
 
 
 		m_step = (globalCoordinate2 - globalCoordinate1).y * m_scale;

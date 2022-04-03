@@ -152,6 +152,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Board\Board.cpp" />
     <ClCompile Include="Model\Figure\FigureBase.cpp" />
+    <ClCompile Include="Model\Goals\GoalBaseGameCorners.cpp" />
+    <ClCompile Include="Model\Goals\GoalPlayer1.cpp" />
+    <ClCompile Include="Model\Goals\GoalPlayer2.cpp" />
     <ClCompile Include="Model\Players\Player1.cpp" />
     <ClCompile Include="Model\Players\Player2.cpp" />
     <ClCompile Include="Model\Players\PlayerBase.cpp" />
@@ -162,25 +165,28 @@
     </ClCompile>
     <ClCompile Include="View\BaseView.cpp" />
     <ClCompile Include="View\ChessBoard\ChessBoardView.cpp" />
+    <ClCompile Include="View\FinishWindow\BaseWindow.cpp" />
+    <ClCompile Include="View\FinishWindow\FailedWindow.cpp" />
     <ClCompile Include="View\Figure\FiguresView.cpp" />
     <ClCompile Include="View\Figure\FigureView1.cpp" />
     <ClCompile Include="View\Figure\FigureView2.cpp" />
     <ClCompile Include="View\Figure\FigureViewBase.cpp" />
+    <ClCompile Include="View\FinishWindow\FinishWindows.cpp" />
+    <ClCompile Include="View\FinishWindow\SuccessWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="IConverterCoordinateFromLocalToGlobal.h" />
-    <ClInclude Include="IListener.h" />
-    <ClInclude Include="IMoveFigure.h" />
-    <ClInclude Include="IGameEntity.h" />
     <ClInclude Include="Interfaces\IConverterCoordinateFromLocalToGlobal.h" />
     <ClInclude Include="Interfaces\IGameEntity.h" />
     <ClInclude Include="Interfaces\IListener.h" />
     <ClInclude Include="Interfaces\IMoveFigure.h" />
     <ClInclude Include="Interfaces\ISubjectView.h" />
-    <ClInclude Include="ISubjectView.h" />
     <ClInclude Include="Model\Board\Board.h" />
     <ClInclude Include="Model\Figure\FigureBase.h" />
+    <ClInclude Include="Interfaces\IGoalsBase.h" />
+    <ClInclude Include="Model\Goals\GoalBaseGameCorners.h" />
+    <ClInclude Include="Model\Goals\GoalPlayer1.h" />
+    <ClInclude Include="Model\Goals\GoalPlayer2.h" />
     <ClInclude Include="Model\Players\Player1.h" />
     <ClInclude Include="Model\Players\Player2.h" />
     <ClInclude Include="Model\Players\PlayerBase.h" />
@@ -188,10 +194,15 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="View\BaseView.h" />
     <ClInclude Include="View\ChessBoard\ChessBoardView.h" />
+    <ClInclude Include="View\FinishWindow\BaseWindow.h" />
+    <ClInclude Include="View\FinishWindow\FailedWindow.h" />
     <ClInclude Include="View\Figure\FiguresView.h" />
     <ClInclude Include="View\Figure\FigureView1.h" />
     <ClInclude Include="View\Figure\FigureView2.h" />
     <ClInclude Include="View\Figure\FigureViewBase.h" />
+    <ClInclude Include="Interfaces\IFinishWindow.h" />
+    <ClInclude Include="View\FinishWindow\FinishWindows.h" />
+    <ClInclude Include="View\FinishWindow\SuccessWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

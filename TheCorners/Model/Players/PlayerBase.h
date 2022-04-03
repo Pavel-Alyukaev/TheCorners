@@ -5,10 +5,10 @@
 
 #pragma once
 
-
 namespace Model
 {
-	class FigureBase;
+class GoalBaseGameCorners;
+class FigureBase;
 
 	class PlayerBase
 	{
@@ -21,23 +21,6 @@ namespace Model
 		* \brief Инициализация игрока
 		*/
 		virtual void Init() = 0;
-
-		/**
-		* \brief перемещение вперед
-		*/
-		void MovingForward();
-		/**
-		* \brief перемещение влево
-		*/
-		void MovingLeft();
-		/**
-		* \brief Перемещение вправо
-		*/
-		void MovingRight();
-		/**
-		* \brief Перемещение назад
-		*/
-		void MovingBackward();
 
 		/**
 		* \brief Задать выбранную фигуру
@@ -62,11 +45,15 @@ namespace Model
 		*/
 		std::vector<std::shared_ptr<FigureBase>> GetFigures();
 
+		std::shared_ptr<GoalBaseGameCorners> GetGoal() const;
+
 		virtual void Restart() = 0;
 
 	protected:
 		std::vector<std::shared_ptr<FigureBase>> m_figures;
 
 		std::shared_ptr<FigureBase> m_selectFigure;
+
+		std::shared_ptr <GoalBaseGameCorners> m_goal;
 	};
 }
