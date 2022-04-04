@@ -4,8 +4,6 @@
 // ****************************************************************************
 
 #pragma once
-#include <list>
-
 #include "../../Interfaces/IListener.h"
 #include "../../Interfaces/IMoveFigure.h"
 class ISubjectView;

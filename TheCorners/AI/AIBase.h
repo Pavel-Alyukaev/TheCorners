@@ -4,9 +4,8 @@
 // ****************************************************************************
 
 #pragma once
-#include <memory>
-
 #include "../Model/Board/Board.h"
+
 namespace Model
 {
 	class FigureBase;

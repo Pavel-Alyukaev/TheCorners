@@ -6,6 +6,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <unordered_map>
+#include <list>
+#include <memory>
 
 struct BoardCell
 {

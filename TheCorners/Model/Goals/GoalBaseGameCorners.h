@@ -4,8 +4,6 @@
 // ****************************************************************************
 
 #pragma once
-#include <list>
-
 #include "../../Interfaces/IGoalsBase.h"
 #include "../../Interfaces/IListener.h"
 

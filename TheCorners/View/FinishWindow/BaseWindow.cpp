@@ -1,8 +1,6 @@
 ﻿#include "stdafx.h"
 #include "BaseWindow.h"
 
-#include <iostream>
-
 namespace View
 {
 BaseWindow::BaseWindow(): m_isVisible(false)
@@ -40,8 +38,6 @@ void BaseWindow::CalculateAndSetGlobalPosition(sf::Vector2u windowResolution)
 	m_Sprite.setScale(m_scale / 2.0f, m_scale / 2.0f);
 
 	m_Sprite.setPosition(m_globalPosition);
-	std::cout << m_globalPosition.x <<"  " << m_globalPosition.y << std::endl;
-
 }
 
 void BaseWindow::Update(float dtAsSeconds)
@@ -53,7 +49,6 @@ void BaseWindow::Update(float dtAsSeconds)
 	{
 		const sf::Vector2f newPosition = m_globalPosition - std::abs(scale - m_scale/2.0f)/2.0f * static_cast<sf::Vector2f>(m_texture.getSize());
 
-		std::cout << newPosition.x << "  " << newPosition.y << std::endl;
 		m_Sprite.setScale(scale, scale);
 	}
 }
