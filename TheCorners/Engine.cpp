@@ -6,6 +6,7 @@
 #include "Model/Players/PlayerBase.h"
 #include "View/Figure/FigureView1.h"
 #include "View/Figure/FigureView2.h"
+#include "AI/SimpleAi.h"
 
 class Textures;
 /**
@@ -100,6 +101,11 @@ void Engine::Init()
 		}
 	}
 	m_players.GetActivePlayer()->UpdateSelectFigure();
+
+	m_ai = new AI::SimpleAi();
+	m_ai->SetFigures(m_players.GetPlayers()[1]->GetFigures());
+	m_ai->SetBoard(&m_chessBoard);
+
 }
 
 Engine::~Engine()
@@ -200,6 +206,15 @@ void Engine::MovingFigureByPlayer(const BoardCell newCell)
 		activeFigure->SetCurrentCell(newCell);
 		m_players.GetActivePlayer()->GetGoal()->Check(figures);
 		m_players.ChangeActivePlayer();
+
+		m_ai->Calculate();
+		m_players.GetActivePlayer()->SetSelectFigure(m_ai->GetFigure());
+		const BoardCell newCellAi = m_ai->GetNewCell();
+		m_chessBoard.ChangeOccupiedCell(m_ai->GetFigure()->GetCurrentCell(), newCellAi);
+		m_players.GetActivePlayer()->GetSelectFigure()->SetCurrentCell(newCellAi);
+		m_players.GetActivePlayer()->GetGoal()->Check(figures);
+		m_players.ChangeActivePlayer();
+
 	}
 }
 
@@ -210,7 +225,7 @@ void Engine::Input()
 {
 	if (KeyPress(sf::Keyboard::Escape))
 	{
-		auto window = m_finishWindows.GetActiveWindow();
+		const auto window = m_finishWindows.GetActiveWindow();
 		if(window !=nullptr)
 		{
 			window->Hide();

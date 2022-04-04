@@ -148,6 +148,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI\AIBase.cpp" />
+    <ClCompile Include="AI\SimpleAi.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model\Board\Board.cpp" />
@@ -175,6 +177,8 @@
     <ClCompile Include="View\FinishWindow\SuccessWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI\AIBase.h" />
+    <ClInclude Include="AI\SimpleAi.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Interfaces\IConverterCoordinateFromLocalToGlobal.h" />
     <ClInclude Include="Interfaces\IGameEntity.h" />

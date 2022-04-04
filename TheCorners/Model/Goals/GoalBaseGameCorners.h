@@ -21,6 +21,8 @@ namespace Model
 		 * \param figures Список фигур тгрока
 		 * \return Флаг достигнута или нет цель
 		 */
+		bool Check(std::vector<std::shared_ptr<FigureBase>>& figures) override;
+
 
 		void AddListener(ISubjectView*) override;
 		void DeleteListener(ISubjectView*) override;

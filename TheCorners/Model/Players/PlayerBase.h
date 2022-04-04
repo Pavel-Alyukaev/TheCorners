@@ -45,7 +45,7 @@ class FigureBase;
 		*/
 		std::vector<std::shared_ptr<FigureBase>> GetFigures();
 
-		std::shared_ptr<GoalBaseGameCorners> GetGoal() const;
+		[[nodiscard]] std::shared_ptr<GoalBaseGameCorners> GetGoal() const;
 
 		virtual void Restart() = 0;
 

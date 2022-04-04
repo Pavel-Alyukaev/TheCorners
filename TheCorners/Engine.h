@@ -8,6 +8,7 @@
 #include "View/ChessBoard/ChessBoardView.h"
 #include "View/Figure/FiguresView.h"
 #include "View/FinishWindow/FinishWindows.h"
+#include "AI/AIBase.h"
 
 class Engine
 {
@@ -43,6 +44,8 @@ private:
 	
 	Model::Board m_chessBoard;
 	Model::Players m_players;
+
+	AI::AIBase* m_ai;
 
 	std::pair<sf::Keyboard::Key, bool> m_isFirstPress;
 };
